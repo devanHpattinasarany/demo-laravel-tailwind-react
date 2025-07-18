@@ -22,3 +22,6 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+# Include build folder in Git
+!public/build
+!public/build/**
