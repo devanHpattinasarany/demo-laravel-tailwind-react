@@ -157,3 +157,199 @@
         @apply bg-background text-foreground;
     }
 }
+
+@layer utilities {
+    /* Grid pattern for hero background */
+    .bg-grid-pattern {
+        background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+
+    /* Text line clamp utilities */
+    .line-clamp-1 {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+    }
+
+    .line-clamp-2 {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    .line-clamp-3 {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+    }
+
+    /* Scroll behavior */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Focus styles */
+    .focus-ring {
+        @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+    }
+
+    /* Custom backdrop blur */
+    .backdrop-blur-sm {
+        backdrop-filter: blur(8px);
+    }
+
+    /* Animation utilities */
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in-up {
+        animation: fade-in-up 0.6s ease-out;
+    }
+
+    .delay-200 {
+        animation-delay: 0.2s;
+    }
+
+    .delay-400 {
+        animation-delay: 0.4s;
+    }
+
+    .delay-600 {
+        animation-delay: 0.6s;
+    }
+
+    .delay-800 {
+        animation-delay: 0.8s;
+    }
+
+    /* Float animation for background elements */
+    @keyframes float {
+        0%, 100% {
+            transform: translate(-50%, -50%) translateY(0px);
+        }
+        50% {
+            transform: translate(-50%, -50%) translateY(-20px);
+        }
+    }
+
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    /* Slow spin animation */
+    @keyframes spin-slow {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .animate-spin-slow {
+        animation: spin-slow 8s linear infinite;
+    }
+
+    /* Gradient animation */
+    @keyframes gradient {
+        0%, 100% {
+            background-size: 200% 200%;
+            background-position: left center;
+        }
+        50% {
+            background-size: 200% 200%;
+            background-position: right center;
+        }
+    }
+
+    .animate-gradient {
+        animation: gradient 3s ease infinite;
+    }
+
+    /* Enhanced shadow utilities */
+    .shadow-3xl {
+        box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Hover effects */
+    .hover-lift {
+        transition: transform 0.2s ease;
+    }
+
+    .hover-lift:hover {
+        transform: translateY(-2px);
+    }
+
+    /* Partners carousel animation */
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .animate-scroll {
+        animation: scroll 30s linear infinite;
+    }
+
+    .animate-scroll:hover {
+        animation-play-state: paused;
+    }
+
+    /* Custom container utilities for better responsive spacing */
+    .container {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem; /* 16px */
+        padding-right: 1rem; /* 16px */
+    }
+
+    @media (min-width: 640px) {
+        .container {
+            max-width: 640px;
+            padding-left: 1.5rem; /* 24px */
+            padding-right: 1.5rem; /* 24px */
+        }
+    }
+
+    @media (min-width: 768px) {
+        .container {
+            max-width: 768px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .container {
+            max-width: 1024px;
+            padding-left: 2rem; /* 32px */
+            padding-right: 2rem; /* 32px */
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .container {
+            max-width: 1280px;
+        }
+    }
+
+    @media (min-width: 1536px) {
+        .container {
+            max-width: 1400px; /* Not full 1536px for better readability */
+        }
+    }
+}
