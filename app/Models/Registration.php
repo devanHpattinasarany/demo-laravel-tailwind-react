@@ -43,10 +43,19 @@ class Registration extends Model
         return $this->checkIn()->exists();
     }
 
-    public static function generateTicketNumber(): string
+    public static function generateTicketNumber(string $eventCode): string
     {
-        $lastRegistration = self::latest('id')->first();
-        $nextNumber = $lastRegistration ? $lastRegistration->id + 1 : 1;
-        return 'BI' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT) . 'T';
+        // Count existing registrations for this event code
+        $existingCount = self::whereHas('event', function($query) use ($eventCode) {
+            $query->where('event_code', $eventCode);
+        })->count();
+        
+        $nextNumber = $existingCount + 1;
+        return 'BI' . $eventCode . str_pad($nextNumber, 3, '0', STR_PAD_LEFT) . 'T';
+    }
+    
+    public static function isNikAlreadyRegistered(string $nik): bool
+    {
+        return self::where('nik', $nik)->where('status', 'active')->exists();
     }
 }

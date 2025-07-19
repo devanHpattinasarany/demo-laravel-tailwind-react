@@ -91,7 +91,7 @@ export default function EventCard({ event, className = '' }: EventCardProps) {
         </div>
 
         {/* Button */}
-        <Link href={`/event/${event.id}`}>
+        <Link href={`/events/${event.id}`}>
           <Button className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white">
             Lihat Detail
             <ArrowRight className="w-4 h-4 ml-2" />

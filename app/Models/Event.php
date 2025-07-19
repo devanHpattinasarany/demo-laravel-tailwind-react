@@ -9,10 +9,12 @@ class Event extends Model
 {
     protected $fillable = [
         'title',
+        'event_code',
         'description',
         'date',
         'time',
         'location',
+        'max_capacity',
         'poster_url',
         'status',
     ];
@@ -45,5 +47,15 @@ class Event extends Model
     public function getCheckInCountAttribute(): int
     {
         return $this->checkIns()->checkedIn()->count();
+    }
+
+    public function isFull(): bool
+    {
+        return $this->registration_count >= $this->max_capacity;
+    }
+
+    public function getAvailableSlots(): int
+    {
+        return max(0, $this->max_capacity - $this->registration_count);
     }
 }

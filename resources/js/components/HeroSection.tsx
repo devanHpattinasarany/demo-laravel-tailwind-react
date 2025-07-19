@@ -10,7 +10,7 @@ interface HeroSectionProps {
   };
 }
 
-export default function HeroSection({ stats }: HeroSectionProps) {
+export default function HeroSection({ stats: _stats }: HeroSectionProps) {
   const [currentFeature, setCurrentFeature] = useState(0);
 
   const features = [
@@ -25,7 +25,7 @@ export default function HeroSection({ stats }: HeroSectionProps) {
       setCurrentFeature((prev) => (prev + 1) % features.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [features.length]);
 
   const scrollToEvents = () => {
     const eventsSection = document.getElementById('events-section');
