@@ -14,9 +14,9 @@ class EventSeeder extends Seeder
     public function run(): void
     {
         Event::create([
-            'title' => 'Talkshow: Entrepreneurship Anak Muda Maluku',
-            'event_code' => 'TLK',
-            'description' => 'Inspirasi dari pengusaha muda sukses Maluku. Diskusi tentang strategi membangun bisnis lokal, memanfaatkan potensi daerah, dan menghadapi tantangan entrepreneurship di era digital.',
+            'title' => 'Seminar Financial Planner',
+            'event_code' => 'FP1',
+            'description' => 'Belajar perencanaan keuangan dari ahlinya. Narasumber: Ligwina Hananto - Financial Planner bersertifikat internasional. Pelajari strategi investasi, perencanaan dana pendidikan, pensiun, dan proteksi keuangan keluarga.',
             'date' => '2025-08-15',
             'time' => '14:00:00',
             'location' => 'Aula Taman Budaya Maluku, Ambon',
@@ -26,9 +26,9 @@ class EventSeeder extends Seeder
         ]);
 
         Event::create([
-            'title' => 'Workshop: Literasi Keuangan untuk Generasi Z',
-            'event_code' => 'WRK',
-            'description' => 'Belajar mengelola keuangan sejak dini. Workshop tentang investasi, menabung, budgeting, dan cara cerdas menggunakan rupiah di masa muda. Cocok untuk mahasiswa dan fresh graduate.',
+            'title' => 'Seminar Rupiah Talks Bijak Berbelanja',
+            'event_code' => 'RT2',
+            'description' => 'Tips belanja cerdas dan mengelola keuangan harian. Narasumber: Risyad Baya\'sud dan Pdt Marshel. Pelajari cara berbelanja bijak, menghindari konsumerisme, dan mengatur keuangan rumah tangga dengan prinsip-prinsip yang tepat.',
             'date' => '2025-08-22',
             'time' => '09:30:00',
             'location' => 'Gedung Bhupala Center, Ambon',
@@ -38,9 +38,9 @@ class EventSeeder extends Seeder
         ]);
 
         Event::create([
-            'title' => 'UMKM Showcase: Produk Lokal Maluku Goes Digital',
-            'event_code' => 'UMK',
-            'description' => 'Pameran dan demo produk UMKM Maluku terbaik. Belajar cara pemasaran digital, e-commerce, dan strategi branding untuk produk lokal agar bisa bersaing di pasar nasional.',
+            'title' => 'Seminar Ekonomi Kreatif',
+            'event_code' => 'EK3',
+            'description' => 'Membangun ekosistem ekonomi kreatif Maluku. Narasumber: Kirapassa, Tahilalats, dan Wiz Baker. Diskusi tentang pengembangan industri kreatif lokal, kolaborasi antar kreator, dan strategi monetisasi karya kreatif di era digital.',
             'date' => '2025-09-05',
             'time' => '10:00:00',
             'location' => 'Lapangan Merdeka Ambon',
