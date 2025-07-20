@@ -20,7 +20,7 @@ class EventSeeder extends Seeder
             'date' => '2025-08-15',
             'time' => '14:00:00',
             'location' => 'Aula Taman Budaya Maluku, Ambon',
-            'max_capacity' => 150,
+            'max_capacity' => 500,
             'poster_url' => 'https://picsum.photos/400/600?random=1',
             'status' => 'active'
         ]);
@@ -32,7 +32,7 @@ class EventSeeder extends Seeder
             'date' => '2025-08-22',
             'time' => '09:30:00',
             'location' => 'Gedung Bhupala Center, Ambon',
-            'max_capacity' => 80,
+            'max_capacity' => 500,
             'poster_url' => 'https://picsum.photos/400/600?random=2',
             'status' => 'active'
         ]);
@@ -44,7 +44,7 @@ class EventSeeder extends Seeder
             'date' => '2025-09-05',
             'time' => '10:00:00',
             'location' => 'Lapangan Merdeka Ambon',
-            'max_capacity' => 200,
+            'max_capacity' => 500,
             'poster_url' => 'https://picsum.photos/400/600?random=3',
             'status' => 'active'
         ]);

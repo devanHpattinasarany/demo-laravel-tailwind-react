@@ -54,8 +54,16 @@ class Registration extends Model
         return 'BI' . $eventCode . str_pad($nextNumber, 3, '0', STR_PAD_LEFT) . 'T';
     }
     
-    public static function isNikAlreadyRegistered(string $nik): bool
+    public static function isAlreadyRegisteredForEvent(int $eventId, string $nik = null, string $email = null, string $phone = null): bool
     {
-        return self::where('nik', $nik)->where('status', 'active')->exists();
+        $query = self::where('event_id', $eventId)->where('status', 'active');
+        
+        $query->where(function ($q) use ($nik, $email, $phone) {
+            if ($nik) $q->orWhere('nik', $nik);
+            if ($email) $q->orWhere('email', $email);
+            if ($phone) $q->orWhere('phone', $phone);
+        });
+        
+        return $query->exists();
     }
 }

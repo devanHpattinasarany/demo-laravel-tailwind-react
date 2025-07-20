@@ -32,27 +32,30 @@ class RegistrationController extends Controller
             ]);
         }
 
-        // Check if NIK is already registered (global restriction)
-        if (Registration::isNikAlreadyRegistered($validated['nik'])) {
-            throw ValidationException::withMessages([
-                'nik' => 'NIK ini sudah pernah digunakan untuk mendaftar event. Satu NIK hanya dapat digunakan untuk satu pendaftaran.'
-            ]);
-        }
-
-        // Check if user already registered for this event with email or phone
+        // Check if user already registered for this specific event
         $existingRegistration = Registration::where('event_id', $event->id)
             ->where(function ($query) use ($validated) {
-                $query->where('email', $validated['email'])
+                $query->where('nik', $validated['nik'])
+                      ->orWhere('email', $validated['email'])
                       ->orWhere('phone', $validated['phone']);
             })
             ->where('status', 'active')
             ->first();
 
         if ($existingRegistration) {
-            $field = $existingRegistration->email === $validated['email'] ? 'email' : 'phone';
-            throw ValidationException::withMessages([
-                $field => 'Anda sudah terdaftar untuk event ini dengan ' . ($field === 'email' ? 'email' : 'nomor telepon') . ' yang sama.'
-            ]);
+            if ($existingRegistration->nik === $validated['nik']) {
+                throw ValidationException::withMessages([
+                    'nik' => 'NIK ini sudah terdaftar untuk event ini.'
+                ]);
+            } elseif ($existingRegistration->email === $validated['email']) {
+                throw ValidationException::withMessages([
+                    'email' => 'Email ini sudah terdaftar untuk event ini.'
+                ]);
+            } else {
+                throw ValidationException::withMessages([
+                    'phone' => 'Nomor telepon ini sudah terdaftar untuk event ini.'
+                ]);
+            }
         }
 
         // Generate ticket number
