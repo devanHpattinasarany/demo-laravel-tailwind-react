@@ -27,6 +27,7 @@ class EventController extends Controller
             'title' => $event->title,
             'event_code' => $event->event_code,
             'description' => $event->description,
+            'speakers' => $event->speakers,
             'date' => $event->date->format('Y-m-d'),
             'formatted_date' => $event->date->translatedFormat('l, d F Y'),
             'time' => $event->time->format('H:i'),

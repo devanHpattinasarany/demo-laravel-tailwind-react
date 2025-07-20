@@ -15,7 +15,8 @@ import {
   Share2,
   Ticket,
   Star,
-  ChevronRight
+  ChevronRight,
+  Mic
 } from 'lucide-react';
 
 interface Event {
@@ -23,6 +24,7 @@ interface Event {
   title: string;
   event_code: string;
   description: string;
+  speakers?: string;
   date: string;
   formatted_date: string;
   time: string;
@@ -180,6 +182,18 @@ export default function EventShow({ event, relatedEvents, meta }: EventShowProps
                           <p className="font-semibold text-gray-900 text-sm leading-relaxed">{event.location}</p>
                         </div>
                       </div>
+
+                      {event.speakers && (
+                        <div className="flex items-start gap-4">
+                          <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <Mic className="w-5 h-5 text-orange-600" />
+                          </div>
+                          <div>
+                            <p className="text-sm text-gray-500 mb-1">Narasumber</p>
+                            <p className="font-semibold text-gray-900 text-sm leading-relaxed">{event.speakers}</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
 

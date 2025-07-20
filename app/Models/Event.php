@@ -11,6 +11,7 @@ class Event extends Model
         'title',
         'event_code',
         'description',
+        'speakers',
         'date',
         'time',
         'location',

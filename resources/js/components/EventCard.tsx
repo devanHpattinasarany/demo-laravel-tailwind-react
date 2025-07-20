@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, Clock, MapPin, Users, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, MapPin, Mic, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Link } from '@inertiajs/react';
@@ -9,6 +9,7 @@ interface EventCardProps {
     id: number;
     title: string;
     description: string;
+    speakers?: string;
     date: string;
     formatted_date: string;
     time: string;
@@ -84,11 +85,13 @@ export default function EventCard({ event, className = '' }: EventCardProps) {
           <span className="text-sm text-gray-600 line-clamp-1">{event.location}</span>
         </div>
 
-        {/* Registration Count */}
-        <div className="flex items-center gap-2 mb-4">
-          <Users className="w-4 h-4 text-orange-500" />
-          <span className="text-sm text-gray-600">{event.registration_count} terdaftar</span>
-        </div>
+        {/* Speakers */}
+        {event.speakers && (
+          <div className="flex items-start gap-2 mb-4">
+            <Mic className="w-4 h-4 text-orange-500 mt-0.5" />
+            <span className="text-sm text-gray-600 line-clamp-2">{event.speakers}</span>
+          </div>
+        )}
 
         {/* Button */}
         <Link href={`/events/${event.id}`}>

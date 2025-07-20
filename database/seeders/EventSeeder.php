@@ -16,10 +16,11 @@ class EventSeeder extends Seeder
         Event::create([
             'title' => 'Seminar Financial Planner',
             'event_code' => 'FP1',
-            'description' => 'Belajar perencanaan keuangan dari ahlinya. Narasumber: Ligwina Hananto - Financial Planner bersertifikat internasional. Pelajari strategi investasi, perencanaan dana pendidikan, pensiun, dan proteksi keuangan keluarga.',
+            'description' => 'Belajar perencanaan keuangan dari ahlinya. Pelajari strategi investasi, perencanaan dana pendidikan, pensiun, dan proteksi keuangan keluarga.',
+            'speakers' => 'Ligwina Hananto',
             'date' => '2025-08-15',
             'time' => '14:00:00',
-            'location' => 'Aula Taman Budaya Maluku, Ambon',
+            'location' => 'Taman Budaya Maluku, Ambon',
             'max_capacity' => 500,
             'poster_url' => 'https://picsum.photos/400/600?random=1',
             'status' => 'active'
@@ -28,10 +29,11 @@ class EventSeeder extends Seeder
         Event::create([
             'title' => 'Seminar Rupiah Talks Bijak Berbelanja',
             'event_code' => 'RT2',
-            'description' => 'Tips belanja cerdas dan mengelola keuangan harian. Narasumber: Risyad Baya\'sud dan Pdt Marshel. Pelajari cara berbelanja bijak, menghindari konsumerisme, dan mengatur keuangan rumah tangga dengan prinsip-prinsip yang tepat.',
+            'description' => 'Tips belanja cerdas dan mengelola keuangan harian. Pelajari cara berbelanja bijak, menghindari konsumerisme, dan mengatur keuangan rumah tangga dengan prinsip-prinsip yang tepat.',
+            'speakers' => 'Risyad Baya\'sud, Pdt Marshel',
             'date' => '2025-08-22',
             'time' => '09:30:00',
-            'location' => 'Gedung Bhupala Center, Ambon',
+            'location' => 'Taman Budaya Maluku, Ambon',
             'max_capacity' => 500,
             'poster_url' => 'https://picsum.photos/400/600?random=2',
             'status' => 'active'
@@ -40,10 +42,11 @@ class EventSeeder extends Seeder
         Event::create([
             'title' => 'Seminar Ekonomi Kreatif',
             'event_code' => 'EK3',
-            'description' => 'Membangun ekosistem ekonomi kreatif Maluku. Narasumber: Kirapassa, Tahilalats, dan Wiz Baker. Diskusi tentang pengembangan industri kreatif lokal, kolaborasi antar kreator, dan strategi monetisasi karya kreatif di era digital.',
+            'description' => 'Membangun ekosistem ekonomi kreatif Maluku. Diskusi tentang pengembangan industri kreatif lokal, kolaborasi antar kreator, dan strategi monetisasi karya kreatif di era digital.',
+            'speakers' => 'Kirapassa, Tahilalats, Wiz Baker',
             'date' => '2025-09-05',
             'time' => '10:00:00',
-            'location' => 'Lapangan Merdeka Ambon',
+            'location' => 'Taman Budaya Maluku, Ambon',
             'max_capacity' => 500,
             'poster_url' => 'https://picsum.photos/400/600?random=3',
             'status' => 'active'
