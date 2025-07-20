@@ -1,394 +1,266 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Ticket {{ $registration->ticket_number }} - {{ $registration->event->title }}</title>
+    <meta charset="utf-8">
     <style>
-        * {
+        @page {
+            margin: 0;
+        }
+        body {
             margin: 0;
             padding: 0;
+            font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: white;
+            width: 800px;
+            height: 320px;
+            font-feature-settings: 'kern' 1, 'liga' 1;
+            text-rendering: optimizeLegibility;
+        }
+        .ticket {
+            width: 800px;
+            height: 320px;
+            display: table;
+            page-break-inside: avoid;
+        }
+
+        /* LEFT - ORANGE */
+        .left {
+            display: table-cell;
+            width: 560px;
+            height: 320px;
+            background: #f97316;
+            color: white;
+            padding: 25px;
+            vertical-align: top;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Helvetica', 'Arial', sans-serif;
-            font-size: 14px;
-            line-height: 1.6;
-            color: #1f2937;
-            background: linear-gradient(135deg, #fef7ed 0%, #fff5f5 100%);
-            padding: 20px;
-        }
-
-        .ticket-container {
-            max-width: 800px;
-            margin: 0 auto;
+        /* RIGHT - WHITE */
+        .right {
+            display: table-cell;
+            width: 240px;
+            height: 320px;
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(234, 88, 12, 0.15);
-            overflow: hidden;
-            border: 3px solid #fed7aa;
+            padding: 15px 15px 15px 100px;
+            border-left: 2px dashed #f97316;
+            vertical-align: middle;
+            box-sizing: border-box;
         }
 
-        .ticket-header {
-            background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
-            color: white;
-            padding: 40px 30px;
-            text-align: center;
-            position: relative;
+        .brand-text {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.95;
         }
-
-        .ticket-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.1) 75%), 
-                        linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.1) 75%);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
-            opacity: 0.3;
-        }
-
-        .festival-logo {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .festival-subtitle {
-            font-size: 16px;
-            opacity: 0.9;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .ticket-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .ticket-number {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 3px;
-            display: inline-block;
-            position: relative;
-            z-index: 1;
-        }
-
-        .ticket-body {
-            padding: 40px 30px;
-        }
-
         .event-title {
-            font-size: 32px;
-            font-weight: bold;
-            color: #ea580c;
+            margin: 0 0 10px 0;
+            font-size: 30px;
+            font-weight: 600;
+            line-height: 1.0;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+        .event-description {
+            font-size: 15px;
+            line-height: 1.3;
+            font-weight: 300;
+            margin-bottom: 12px;
+            opacity: 0.85;
+        }
+        .event-details {
+            font-size: 16px;
+            line-height: 1.3;
+            font-weight: 400;
+            margin-top: 8px;
+        }
+        .date-container {
+            margin-top: 12px;
+        }
+        .event-details div {
+            margin-bottom: 4px;
+        }
+        .date-display {
+            background: #ea580c;
+            padding: 14px 18px;
+            border-radius: 10px;
             text-align: center;
-            margin-bottom: 30px;
+            width: 90px;
+            margin: 0;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .date-day {
+            font-size: 26px;
+            font-weight: 500;
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+        .date-month {
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.95;
+        }
+
+        .section-label {
+            font-size: 11px;
+            color: #888;
+            font-weight: 500;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .ticket-number {
+            font-size: 24px;
+            color: #f97316;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1;
+            letter-spacing: 0.5px;
+            padding: 8px 12px;
+            background: rgba(249,115,22,0.08);
+            border-radius: 8px;
+            border: 1px dashed #f97316;
+            text-align: center;
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+        }
+        .participant-info {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .user-name {
+            font-size: 17px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            line-height: 1.2;
+            color: #2a2a2a;
+        }
+        .user-phone {
+            font-size: 15px;
+            color: #666;
+            font-weight: 400;
+        }
+        .access-info {
+            margin-top: 12px;
+            padding: 8px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+        .gate-title {
+            color: #f97316;
+            font-weight: 500;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+        .gate-instruction {
+            font-size: 10px;
+            color: #777;
+            margin-top: 3px;
+            font-weight: 300;
             line-height: 1.2;
         }
-
-        .event-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .detail-card {
-            flex: 1;
-            min-width: 200px;
-            background: linear-gradient(135deg, #fef7ed 0%, #fed7aa 100%);
-            border: 2px solid #fdba74;
-            border-radius: 12px;
-            padding: 20px;
+        .footer-info {
+            margin-top: 10px;
+            font-size: 9px;
+            color: #999;
             text-align: center;
+            line-height: 1.2;
         }
-
-        .detail-icon {
-            width: 40px;
-            height: 40px;
-            background: #ea580c;
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-
-        .detail-label {
-            font-size: 12px;
-            color: #ea580c;
-            font-weight: bold;
-            text-transform: uppercase;
+        .logo-text {
+            margin-top: 6px;
+            font-size: 8px;
+            color: #bbb;
+            text-align: center;
             letter-spacing: 1px;
-            margin-bottom: 5px;
+            font-weight: 300;
         }
-
-        .detail-value {
-            font-size: 16px;
-            font-weight: bold;
-            color: #1f2937;
-        }
-
-        .divider {
-            border: none;
-            border-top: 3px dashed #fdba74;
-            margin: 30px 0;
-            opacity: 0.7;
-        }
-
-        .participant-info {
-            background: linear-gradient(135deg, #fef7ed 0%, #fef2f2 100%);
-            border: 2px solid #fdba74;
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 30px;
-        }
-
-        .participant-title {
+        .brand-logo-text {
+            margin: 0 0 6px 0;
+            text-align: left;
             font-size: 20px;
-            font-weight: bold;
-            color: #ea580c;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .participant-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
-        }
-
-        .participant-field {
-            flex: 1;
-            min-width: 150px;
-        }
-
-        .field-label {
-            font-size: 11px;
-            color: #6b7280;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 5px;
-        }
-
-        .field-value {
-            font-size: 16px;
-            font-weight: bold;
-            color: #1f2937;
-            word-break: break-word;
-        }
-
-        .important-notes {
-            background: rgba(254, 226, 226, 0.5);
-            border: 2px solid #fca5a5;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-
-        .notes-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #dc2626;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .note-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            gap: 15px;
-        }
-
-        .note-number {
-            width: 24px;
-            height: 24px;
-            background: #ea580c;
+            font-weight: 700;
             color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-            flex-shrink: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
-
-        .note-text {
-            font-size: 14px;
-            color: #374151;
-            line-height: 1.5;
+        .brand-text {
+            margin: 0 0 8px 0;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.95;
         }
-
-        .footer {
-            text-align: center;
-            color: #6b7280;
-            font-size: 12px;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 2px solid #f3f4f6;
+        .event-title {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 1.0;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
         }
-
-        .qr-placeholder {
-            width: 100px;
-            height: 100px;
-            background: #f3f4f6;
-            border: 2px solid #d1d5db;
-            border-radius: 8px;
-            margin: 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            color: #6b7280;
-            text-align: center;
-        }
-
-        /* Print optimizations */
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
-            
-            .ticket-container {
-                box-shadow: none;
-                border: 1px solid #e5e7eb;
-            }
+        .event-description {
+            font-size: 15px;
+            line-height: 1.3;
+            font-weight: 300;
+            margin-bottom: 10px;
+            opacity: 0.85;
         }
     </style>
 </head>
 <body>
-    <div class="ticket-container">
-        <!-- Ticket Header -->
-        <div class="ticket-header">
-            <div class="festival-logo">FESTIVAL TAHURI 2025</div>
-            <div class="festival-subtitle">Celebrasi Kreativitas Maluku</div>
-            
-            <!-- Ticket Icon Placeholder -->
-            <div class="ticket-icon">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
+    <div class="ticket">
+        <div class="left">
+            <div class="brand-text">RABURABUMARKET X FESTIVAL TAHURI</div>
+            <div class="event-title">{{ strtoupper($registration->event->title) }}</div>
+
+            <div class="event-description">
+                {{ Str::limit($registration->event->description ?? 'Workshop kreatif untuk mengembangkan keterampilan literasi keuangan bagi generasi muda dalam era digital modern.', 120) }}
             </div>
-            
-            <div class="ticket-number">{{ $registration->ticket_number }}</div>
+
+            <div class="date-container">
+                <div class="date-display">
+                    <div class="date-day">{{ $registration->event->date->format('d') }}</div>
+                    <div class="date-month">{{ strtoupper($registration->event->date->translatedFormat('M')) }}</div>
+                </div>
+            </div>
+
+            <div class="event-details">
+                <div>{{ $registration->event->time }} WIB</div>
+                <div>{{ $registration->event->location }}</div>
+            </div>
         </div>
 
-        <!-- Ticket Body -->
-        <div class="ticket-body">
-            <!-- Event Title -->
-            <div class="event-title">{{ $registration->event->title }}</div>
+        <div class="right">
+            <div class="section-label">Nomor Tiket</div>
+            <div class="ticket-number">{{ $registration->ticket_number }}</div>
 
-            <!-- Event Details -->
-            <div class="event-details">
-                <div class="detail-card">
-                    <div class="detail-icon">📅</div>
-                    <div class="detail-label">Tanggal</div>
-                    <div class="detail-value">
-                        @if($registration->event->date)
-                            {{ \Carbon\Carbon::parse($registration->event->date)->translatedFormat('l, d F Y') }}
-                        @else
-                            Tanggal belum tersedia
-                        @endif
-                    </div>
-                </div>
-
-                <div class="detail-card">
-                    <div class="detail-icon">🕐</div>
-                    <div class="detail-label">Waktu</div>
-                    <div class="detail-value">{{ $registration->event->time }} WIB</div>
-                </div>
-
-                <div class="detail-card">
-                    <div class="detail-icon">📍</div>
-                    <div class="detail-label">Lokasi</div>
-                    <div class="detail-value">{{ $registration->event->location }}</div>
-                </div>
-            </div>
-
-            <!-- Divider -->
-            <hr class="divider">
-
-            <!-- Participant Information -->
+            <div class="section-label participant">Peserta</div>
             <div class="participant-info">
-                <div class="participant-title">Informasi Peserta</div>
-                <div class="participant-details">
-                    <div class="participant-field">
-                        <div class="field-label">Nama Lengkap</div>
-                        <div class="field-value">{{ $registration->full_name }}</div>
-                    </div>
-                    <div class="participant-field">
-                        <div class="field-label">NIK</div>
-                        <div class="field-value">{{ $registration->nik }}</div>
-                    </div>
-                    <div class="participant-field">
-                        <div class="field-label">Nomor Telepon</div>
-                        <div class="field-value">{{ $registration->phone }}</div>
-                    </div>
-                    <div class="participant-field">
-                        <div class="field-label">Email</div>
-                        <div class="field-value">{{ $registration->email }}</div>
-                    </div>
-                </div>
+                <div class="user-name">{{ $registration->full_name }}</div>
+                <div class="user-phone">{{ $registration->phone }}</div>
             </div>
 
-            <!-- Important Notes -->
-            <div class="important-notes">
-                <div class="notes-title">Catatan Penting</div>
-                
-                <div class="note-item">
-                    <div class="note-number">1</div>
-                    <div class="note-text">Simpan tiket ini dengan baik dan tunjukkan saat check-in di lokasi event</div>
-                </div>
-
-                <div class="note-item">
-                    <div class="note-number">2</div>
-                    <div class="note-text">Datang 30 menit sebelum acara dimulai untuk proses check-in</div>
-                </div>
-
-                <div class="note-item">
-                    <div class="note-number">3</div>
-                    <div class="note-text">Bawa identitas asli (KTP) yang sesuai dengan data pendaftaran</div>
-                </div>
-
-                <div class="note-item">
-                    <div class="note-number">4</div>
-                    <div class="note-text">Tiket tidak dapat dipindahtangankan kepada orang lain</div>
-                </div>
+            <div class="access-info">
+                <div class="gate-title">INFO</div>
+                <div class="gate-instruction">Tunjukkan tiket ini saat masuk</div>
             </div>
 
-            <!-- QR Code Placeholder -->
-            <div class="qr-placeholder">
-                QR CODE<br>
-                {{ $registration->ticket_number }}
+            <div class="footer-info">
+                <div>Tiket valid untuk 1 orang</div>
+                <div>Harap datang 15 menit sebelum acara</div>
             </div>
 
-            <!-- Footer -->
-            <div class="footer">
-                <p><strong>Festival Tahuri 2025</strong> - Celebrasi Kreativitas Maluku</p>
-                <p>Dicetak pada {{ now()->translatedFormat('d F Y, H:i') ?? now()->format('d M Y, H:i') }} WIB</p>
-                <p>Info: support@tahuri.id | www.tahuri.id</p>
+            <div class="logo-text">
+                FESTIVAL TAHURI 2025
             </div>
         </div>
     </div>

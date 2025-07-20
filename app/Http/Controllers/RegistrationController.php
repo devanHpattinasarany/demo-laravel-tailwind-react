@@ -79,7 +79,7 @@ class RegistrationController extends Controller
     public function show(Registration $registration)
     {
         $registration->load('event');
-        
+
         return Inertia::render('Registration/Show', [
             'registration' => $registration
         ]);
@@ -89,27 +89,16 @@ class RegistrationController extends Controller
     {
         // Load the event relationship
         $registration->load('event');
-        
+
         // Create PDF from the ticket template
-        $pdf = Pdf::loadView('pdf.ticket', [
-            'registration' => $registration
-        ]);
-        
-        // Set PDF options
-        $pdf->setPaper('A4', 'portrait');
-        $pdf->setOptions([
-            'isHtml5ParserEnabled' => true,
-            'isPhpEnabled' => true,
-            'defaultFont' => 'Arial'
-        ]);
-        
+        $pdf = Pdf::loadView('pdf.ticket', compact('registration'));
+
+        // Set landscape orientation for ticket
+        $pdf->setPaper([0, 0, 278, 800], 'landscape');
+
         // Generate filename
-        $filename = sprintf(
-            'E-Ticket_%s_%s.pdf',
-            $registration->ticket_number,
-            str_replace(' ', '_', $registration->event->title)
-        );
-        
+        $filename = 'Ticket_' . $registration->ticket_number . '.pdf';
+
         // Return PDF as download
         return $pdf->download($filename);
     }
