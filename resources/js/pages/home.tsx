@@ -2,7 +2,7 @@ import React from 'react';
 import { Head } from '@inertiajs/react';
 import HomeLayout from '@/layouts/home-layout';
 import HeroSection from '@/components/HeroSection';
-import SeminarsGrid from '@/components/SeminarsGrid';
+import SeminarsGridDebug from '@/components/SeminarsGridDebug';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
 import { FadeInUp, SlideIn, StaggerContainer } from '@/components/animations';
@@ -60,7 +60,7 @@ export default function Home({ seminars, stats, meta }: HomeProps) {
         <HeroSection stats={stats} />
 
         {/* Seminars Grid Section */}
-        <SeminarsGrid seminars={seminars} />
+        <SeminarsGridDebug seminars={seminars} />
 
         {/* Why Choose Section with Animations */}
         <section id="about-section" className="py-16 bg-gradient-to-br from-orange-50 via-background to-red-50">
