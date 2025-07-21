@@ -3,6 +3,7 @@ import { Search, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import SeminarCard from './SeminarCard';
+import { FadeInUp, StaggerContainer } from '@/components/animations';
 
 interface Seminar {
   id: number;
@@ -31,8 +32,8 @@ export default function SeminarsGrid({ seminars }: SeminarsGridProps) {
     <section id="events-section" className="py-16 bg-background">
       <div className="container mx-auto">
 
-        {/* Section Header */}
-        <div className="text-center space-y-4 mb-12">
+        {/* Section Header with Animations */}
+        <FadeInUp className="text-center space-y-4 mb-12">
           <div className="inline-flex">
             <Badge className="px-4 py-2 text-sm bg-orange-100 text-orange-800 border border-orange-200">
               <Calendar className="w-4 h-4 mr-2" />
@@ -47,12 +48,15 @@ export default function SeminarsGrid({ seminars }: SeminarsGridProps) {
             Pilih talkshow yang sesuai dengan minat Anda. Nikmati pengalaman edukasi finansial,
             ekonomi kreatif, dan berbagai topik menarik lainnya.
           </p>
-        </div>
+        </FadeInUp>
 
 
-        {/* talkshow Grid */}
+        {/* Talkshow Grid with Stagger Animation */}
         {seminars.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <StaggerContainer 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+            staggerDelay={0.15}
+          >
             {seminars.map((seminar) => (
               <SeminarCard
                 key={seminar.id}
@@ -60,9 +64,9 @@ export default function SeminarsGrid({ seminars }: SeminarsGridProps) {
                 className="h-full"
               />
             ))}
-          </div>
+          </StaggerContainer>
         ) : (
-          <div className="text-center py-16 space-y-4">
+          <FadeInUp className="text-center py-16 space-y-4" delay={0.2}>
             <div className="w-16 h-16 mx-auto bg-muted rounded-full flex items-center justify-center">
               <Search className="w-8 h-8 text-muted-foreground" />
             </div>
@@ -73,16 +77,16 @@ export default function SeminarsGrid({ seminars }: SeminarsGridProps) {
             <Button variant="outline" className="mt-4 border-orange-200 text-orange-700 hover:bg-orange-50">
               Cari Talkshow Lainnya
             </Button>
-          </div>
+          </FadeInUp>
         )}
 
-        {/* Load More / Pagination Placeholder */}
+        {/* Load More Button with Animation */}
         {seminars.length > 0 && seminars.length >= 6 && (
-          <div className="text-center mt-12">
+          <FadeInUp className="text-center mt-12" delay={0.4}>
             <Button variant="outline" size="lg" className="px-8 border-orange-200 text-orange-700 hover:bg-orange-50">
               Muat Lebih Banyak Talkshow
             </Button>
-          </div>
+          </FadeInUp>
         )}
       </div>
     </section>

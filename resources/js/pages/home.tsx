@@ -5,6 +5,7 @@ import HeroSection from '@/components/HeroSection';
 import SeminarsGrid from '@/components/SeminarsGrid';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
+import { FadeInUp, SlideIn, StaggerContainer } from '@/components/animations';
 
 interface Seminar {
   id: number;
@@ -61,19 +62,24 @@ export default function Home({ seminars, stats, meta }: HomeProps) {
         {/* Seminars Grid Section */}
         <SeminarsGrid seminars={seminars} />
 
-        {/* Why Choose Section */}
+        {/* Why Choose Section with Animations */}
         <section id="about-section" className="py-16 bg-gradient-to-br from-orange-50 via-background to-red-50">
           <div className="container mx-auto">
             <div className="max-w-6xl mx-auto text-center space-y-8">
-              <h2 className="text-3xl font-bold">
-                Mengapa Bergabung di 
-                <span className="bg-gradient-to-r from-orange-600 to-red-500 bg-clip-text text-transparent"> Festival Tahuri</span>?
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Festival yang memadukan kreativitas, inspirasi, dan komunitas dalam satu pengalaman tak terlupakan
-              </p>
+              <SlideIn direction="up" className="space-y-4">
+                <h2 className="text-3xl font-bold">
+                  Mengapa Bergabung di 
+                  <span className="bg-gradient-to-r from-orange-600 to-red-500 bg-clip-text text-transparent"> Festival Tahuri</span>?
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Festival yang memadukan kreativitas, inspirasi, dan komunitas dalam satu pengalaman tak terlupakan
+                </p>
+              </SlideIn>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+              <StaggerContainer 
+                className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12"
+                staggerDelay={0.2}
+              >
                 <div className="bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-orange-100 hover:border-orange-200 transition-all duration-300 hover:shadow-lg space-y-4">
                   <div className="w-16 h-16 mx-auto bg-orange-100 rounded-2xl flex items-center justify-center">
                     <svg className="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,16 +115,16 @@ export default function Home({ seminars, stats, meta }: HomeProps) {
                     Bergabung dengan komunitas kreatif Maluku. Networking dengan entrepreneur, UMKM, dan kreator lokal terbaik.
                   </p>
                 </div>
-              </div>
+              </StaggerContainer>
             </div>
           </div>
         </section>
 
 
-        {/* CTA Section */}
+        {/* CTA Section with Animations */}
         <section className="py-16 bg-gradient-to-r from-orange-100/80 to-red-100/80">
           <div className="container mx-auto">
-            <div className="max-w-4xl mx-auto text-center space-y-6">
+            <FadeInUp className="max-w-4xl mx-auto text-center space-y-6">
               <h2 className="text-3xl font-bold">
                 Siap Bergabung di <span className="bg-gradient-to-r from-orange-600 to-red-500 bg-clip-text text-transparent">Festival Tahuri</span>?
               </h2>
@@ -143,7 +149,7 @@ export default function Home({ seminars, stats, meta }: HomeProps) {
                   FAQ & Info Lengkap
                 </a>
               </div>
-            </div>
+            </FadeInUp>
           </div>
         </section>
 
