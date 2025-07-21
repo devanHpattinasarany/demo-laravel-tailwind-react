@@ -17,7 +17,7 @@ export default function SlideIn({
   delay = 0, 
   duration = 0.6, 
   className = "",
-  threshold = 0.1
+  threshold = 0.3
 }: SlideInProps) {
   const { ref, inView } = useInView({
     threshold,
