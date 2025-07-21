@@ -40,7 +40,9 @@ class Registration extends Model
 
     public function isCheckedIn(): bool
     {
-        return $this->checkIn()->exists();
+        // Refresh the relationship to get the latest data
+        $this->load('checkIn');
+        return $this->checkIn && $this->checkIn->status === 'checked_in';
     }
 
     public static function generateTicketNumber(string $eventCode): string

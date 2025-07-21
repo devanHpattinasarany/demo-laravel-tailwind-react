@@ -112,16 +112,25 @@ class CheckInController extends Controller
     {
         $request->validate([
             'query' => 'required|string|min:2',
-            'event_id' => 'nullable|exists:events,id'
+            'event_id' => 'nullable|exists:events,id',
+            'date_filter' => 'nullable|in:today,all' // Allow filtering by date preference
         ]);
 
         $query = Registration::query()
             ->with(['event', 'checkIn'])
-            ->active();
+            ->where('registrations.status', 'active'); // Specify table name to avoid ambiguity
 
         // Filter by event if specified
         if ($request->filled('event_id')) {
             $query->where('event_id', $request->input('event_id'));
+        }
+
+        // Apply date filtering - prioritize today's events by default
+        $dateFilter = $request->input('date_filter', 'all'); // Default to 'all' for backward compatibility
+        if ($dateFilter === 'today') {
+            $query->whereHas('event', function ($q) {
+                $q->whereDate('date', Carbon::today());
+            });
         }
 
         // Search by ticket number, name, NIK, phone, or email
@@ -133,6 +142,10 @@ class CheckInController extends Controller
               ->orWhere('phone', 'like', "%{$searchTerm}%")
               ->orWhere('email', 'like', "%{$searchTerm}%");
         })
+        ->join('events', 'registrations.event_id', '=', 'events.id')
+        ->orderByRaw('CASE WHEN DATE(events.date) = ? THEN 0 ELSE 1 END', [Carbon::today()->format('Y-m-d')]) // Prioritize today's events
+        ->orderBy('registrations.created_at', 'desc') // Then by registration date
+        ->select('registrations.*') // Only select registrations fields to avoid conflicts
         ->limit(10)
         ->get()
         ->map(function ($registration) {
@@ -147,7 +160,7 @@ class CheckInController extends Controller
                 'event_code' => $registration->event->event_code,
                 'event_date' => $registration->event->date->format('Y-m-d'),
                 'event_time' => $registration->event->time?->format('H:i'),
-                'is_checked_in' => $registration->isCheckedIn(),
+                'is_checked_in' => $registration->checkIn && $registration->checkIn->status === 'checked_in',
                 'check_in_time' => $registration->checkIn?->check_in_time?->format('Y-m-d H:i:s'),
                 'registration_date' => ($registration->registration_date ?? $registration->created_at)->format('Y-m-d H:i:s'),
             ];
@@ -172,6 +185,21 @@ class CheckInController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Registrasi tidak valid atau sudah dibatalkan.',
+            ], 400);
+        }
+
+        // Validate event date - only allow check-ins for events scheduled today
+        $today = Carbon::today();
+        $eventDate = $registration->event->date;
+        
+        if (!$eventDate->isSameDay($today)) {
+            $dateLabel = $this->getEventDateLabel($eventDate, $today);
+            
+            return response()->json([
+                'success' => false,
+                'message' => "Check-in tidak dapat dilakukan karena event \"{$registration->event->title}\" dijadwalkan untuk {$dateLabel}, bukan hari ini.",
+                'event_date' => $eventDate->format('Y-m-d'),
+                'current_date' => $today->format('Y-m-d'),
             ], 400);
         }
 
@@ -250,7 +278,7 @@ class CheckInController extends Controller
                     'nik' => $registration->nik,
                     'phone' => $registration->phone,
                     'email' => $registration->email,
-                    'is_checked_in' => $registration->isCheckedIn(),
+                    'is_checked_in' => $registration->checkIn && $registration->checkIn->status === 'checked_in',
                     'check_in_time' => $registration->checkIn?->check_in_time?->format('Y-m-d H:i:s'),
                     'registration_date' => ($registration->registration_date ?? $registration->created_at)->format('Y-m-d H:i:s'),
                 ];
@@ -277,5 +305,25 @@ class CheckInController extends Controller
             'registrations' => $registrations,
             'statistics' => $statistics,
         ]);
+    }
+
+    /**
+     * Generate human-readable date label for event date context
+     */
+    private function getEventDateLabel(Carbon $eventDate, Carbon $today): string
+    {
+        if ($eventDate->isToday()) {
+            return 'hari ini';
+        } elseif ($eventDate->isTomorrow()) {
+            return 'besok';
+        } elseif ($eventDate->isYesterday()) {
+            return 'kemarin';
+        } elseif ($eventDate->isFuture()) {
+            $daysDiff = $today->diffInDays($eventDate);
+            return "{$daysDiff} hari lagi";
+        } else {
+            $daysDiff = $eventDate->diffInDays($today);
+            return "{$daysDiff} hari yang lalu";
+        }
     }
 }

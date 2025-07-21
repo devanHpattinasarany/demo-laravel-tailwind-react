@@ -124,6 +124,9 @@ class SeminarController extends Controller
         ];
 
         $recentRegistrations = $seminar->registrations()
+            ->with(['checkIn' => function($query) {
+                $query->where('status', 'checked_in');
+            }])
             ->active()
             ->orderBy('created_at', 'desc')
             ->limit(10)
@@ -136,7 +139,8 @@ class SeminarController extends Controller
                     'phone' => $registration->phone,
                     'ticket_number' => $registration->ticket_number,
                     'status' => $registration->status,
-                    'is_checked_in' => $registration->isCheckedIn(),
+                    'is_checked_in' => $registration->checkIn && $registration->checkIn->status === 'checked_in',
+                    'check_in_time' => $registration->checkIn ? $registration->checkIn->check_in_time->format('Y-m-d H:i:s') : null,
                     'created_at' => $registration->created_at->format('Y-m-d H:i:s'),
                 ];
             });
@@ -245,8 +249,8 @@ class SeminarController extends Controller
                 'nik' => $registration->nik,
                 'ticket_number' => $registration->ticket_number,
                 'created_at' => $registration->created_at->format('Y-m-d H:i:s'),
-                'is_checked_in' => $registration->isCheckedIn(),
-                'check_in_time' => $registration->checkIn?->created_at?->format('Y-m-d H:i:s'),
+                'is_checked_in' => $registration->checkIn && $registration->checkIn->status === 'checked_in',
+                'check_in_time' => $registration->checkIn ? $registration->checkIn->check_in_time->format('Y-m-d H:i:s') : null,
             ];
         });
 

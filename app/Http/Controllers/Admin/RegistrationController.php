@@ -15,7 +15,7 @@ class RegistrationController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Registration::with(['event'])
+        $query = Registration::with(['event', 'checkIn'])
             ->latest();
 
         // Filter by event
@@ -44,6 +44,24 @@ class RegistrationController extends Controller
         }
 
         $registrations = $query->paginate(20);
+
+        // Transform registration data to include check_in info
+        $registrations->getCollection()->transform(function ($registration) {
+            $data = $registration->toArray();
+            
+            // Add check_in data if exists
+            if ($registration->checkIn && $registration->checkIn->status === 'checked_in') {
+                $data['check_in'] = [
+                    'id' => $registration->checkIn->id,
+                    'created_at' => $registration->checkIn->check_in_time->format('Y-m-d H:i:s'),
+                    'status' => $registration->checkIn->status,
+                ];
+            } else {
+                $data['check_in'] = null;
+            }
+            
+            return $data;
+        });
 
         // Get events for filter dropdown
         $events = Event::select('id', 'title', 'event_code')
