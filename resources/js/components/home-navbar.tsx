@@ -54,7 +54,7 @@ export function HomeNavbar() {
                                 }}
                             >
                                 <Calendar className="h-5 w-5" />
-                                <span>Event</span>
+                                <span>Talkshow</span>
                             </a>
                             <a 
                                 href="#about-section"
@@ -111,7 +111,7 @@ export function HomeNavbar() {
                             }}
                         >
                             <Calendar className="h-4 w-4 text-orange-600" />
-                            <span className="font-medium text-sm">Event</span>
+                            <span className="font-medium text-sm">Talkshow</span>
                         </a>
                         <a 
                             href="#about-section"
