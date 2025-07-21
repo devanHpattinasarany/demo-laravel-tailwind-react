@@ -29,7 +29,7 @@ export function HomeNavbar() {
                             <Link href="/">
                                 <img 
                                     src="/images/main logo1.png" 
-                                    alt="Tahuri Events" 
+                                    alt="Festival Tahuri" 
                                     className="h-10 w-auto"
                                 />
                             </Link>

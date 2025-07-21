@@ -132,7 +132,7 @@ export default function RegistrationShow({ registration }: RegistrationShowProps
               </Link>
               <span className="text-gray-400">/</span>
               <Link 
-                href={`/events/${eventId}`}
+                href={`/seminars/${eventId}`}
                 className="text-orange-600 hover:text-orange-800 font-medium transition-colors duration-200"
               >
                 Event Detail

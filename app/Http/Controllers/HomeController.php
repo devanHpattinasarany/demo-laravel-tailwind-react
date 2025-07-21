@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
+use App\Models\Event as Seminar;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -10,12 +10,12 @@ use Inertia\Response;
 class HomeController extends Controller
 {
     /**
-     * Display the landing page with active events
+     * Display the landing page with active seminars
      */
     public function index(): Response
     {
         // Optimized query with only necessary fields and proper ordering
-        $events = Event::select([
+        $seminars = Seminar::select([
                 'id',
                 'title', 
                 'description',
@@ -27,42 +27,42 @@ class HomeController extends Controller
                 'status'
             ])
             ->active()
-            ->where('date', '>=', now()->toDateString()) // Only future events
+            ->where('date', '>=', now()->toDateString()) // Only future seminars
             ->orderBy('date', 'asc')
             ->orderBy('time', 'asc')
             ->withCount(['registrations as registration_count'])
             ->get()
-            ->map(function ($event) {
+            ->map(function ($seminar) {
                 return [
-                    'id' => $event->id,
-                    'title' => $event->title,
-                    'description' => $event->description,
-                    'speakers' => $event->speakers,
-                    'date' => $event->date->format('Y-m-d'),
-                    'formatted_date' => $event->date->translatedFormat('l, d F Y'),
-                    'time' => $event->time->format('H:i'),
-                    'formatted_time' => $event->time->format('H:i') . ' WIB',
-                    'location' => $event->location,
-                    'poster_url' => $event->poster_url,
-                    'registration_count' => $event->registration_count,
-                    'slug' => \Str::slug($event->title),
-                    // Calculate days until event
-                    'days_until' => now()->diffInDays($event->date, false),
-                    'is_today' => $event->date->isToday(),
-                    'is_tomorrow' => $event->date->isTomorrow(),
+                    'id' => $seminar->id,
+                    'title' => $seminar->title,
+                    'description' => $seminar->description,
+                    'speakers' => $seminar->speakers,
+                    'date' => $seminar->date->format('Y-m-d'),
+                    'formatted_date' => $seminar->date->translatedFormat('l, d F Y'),
+                    'time' => $seminar->time->format('H:i'),
+                    'formatted_time' => $seminar->time->format('H:i') . ' WIB',
+                    'location' => $seminar->location,
+                    'poster_url' => $seminar->poster_url,
+                    'registration_count' => $seminar->registration_count,
+                    'slug' => \Str::slug($seminar->title),
+                    // Calculate days until seminar (rounded to whole days)
+                    'days_until' => (int) ceil(now()->diffInDays($seminar->date, false)),
+                    'is_today' => $seminar->date->isToday(),
+                    'is_tomorrow' => $seminar->date->isTomorrow(),
                 ];
             });
 
         return Inertia::render('home', [
-            'events' => $events,
+            'seminars' => $seminars,
             'stats' => [
-                'total_events' => $events->count(),
-                'upcoming_this_week' => $events->filter(fn($event) => $event['days_until'] <= 7)->count(),
+                'total_seminars' => $seminars->count(),
+                'upcoming_this_week' => $seminars->filter(fn($seminar) => $seminar['days_until'] <= 7)->count(),
             ],
             'meta' => [
-                'title' => 'Tahuri Events - Platform Event & Seminar Terpercaya',
-                'description' => 'Temukan dan daftar event teknologi, workshop, dan seminar terbaik. Platform ticketing yang mudah dan terpercaya untuk pengembangan diri Anda.',
-                'keywords' => 'event teknologi, workshop programming, seminar IT, tahuri events, ticketing online',
+                'title' => 'Tahuri Seminars - Platform Seminar Edukasi Terpercaya',
+                'description' => 'Temukan dan daftar seminar edukasi, workshop finansial, dan seminar ekonomi kreatif terbaik. Platform ticketing yang mudah dan terpercaya untuk pengembangan diri Anda.',
+                'keywords' => 'seminar edukasi, workshop finansial, seminar ekonomi kreatif, tahuri seminars, ticketing online',
                 'canonical_url' => route('home'),
             ]
         ]);

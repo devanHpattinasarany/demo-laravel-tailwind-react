@@ -36,20 +36,20 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
     };
 
     return (
-        <AuthLayout title="Reset password" description="Please enter your new password below">
-            <Head title="Reset password" />
+        <AuthLayout title="Reset Password" description="Masukkan password baru Anda di bawah ini">
+            <Head title="Reset Password - Festival Tahuri" />
 
             <form onSubmit={submit}>
                 <div className="grid gap-6">
                     <div className="grid gap-2">
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">Email Admin</Label>
                         <Input
                             id="email"
                             type="email"
                             name="email"
                             autoComplete="email"
                             value={data.email}
-                            className="mt-1 block w-full"
+                            className="border-gray-300 bg-gray-50 text-gray-600"
                             readOnly
                             onChange={(e) => setData('email', e.target.value)}
                         />
@@ -57,39 +57,43 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">Password Baru</Label>
                         <Input
                             id="password"
                             type="password"
                             name="password"
                             autoComplete="new-password"
                             value={data.password}
-                            className="mt-1 block w-full"
+                            className="border-gray-300 focus:border-orange-500 focus:ring-orange-500"
                             autoFocus
                             onChange={(e) => setData('password', e.target.value)}
-                            placeholder="Password"
+                            placeholder="Password minimal 8 karakter"
                         />
                         <InputError message={errors.password} />
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="password_confirmation">Confirm password</Label>
+                        <Label htmlFor="password_confirmation">Konfirmasi Password</Label>
                         <Input
                             id="password_confirmation"
                             type="password"
                             name="password_confirmation"
                             autoComplete="new-password"
                             value={data.password_confirmation}
-                            className="mt-1 block w-full"
+                            className="border-gray-300 focus:border-orange-500 focus:ring-orange-500"
                             onChange={(e) => setData('password_confirmation', e.target.value)}
-                            placeholder="Confirm password"
+                            placeholder="Ulangi password baru"
                         />
                         <InputError message={errors.password_confirmation} className="mt-2" />
                     </div>
 
-                    <Button type="submit" className="mt-4 w-full" disabled={processing}>
+                    <Button 
+                        type="submit" 
+                        className="mt-4 w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200" 
+                        disabled={processing}
+                    >
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                        Reset password
+                        Update Password
                     </Button>
                 </div>
             </form>

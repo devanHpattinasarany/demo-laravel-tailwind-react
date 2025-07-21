@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Event extends Model
 {
@@ -30,7 +31,7 @@ class Event extends Model
         return $this->hasMany(Registration::class);
     }
 
-    public function checkIns(): HasMany
+    public function checkIns(): HasManyThrough
     {
         return $this->hasManyThrough(CheckIn::class, Registration::class);
     }
@@ -40,14 +41,24 @@ class Event extends Model
         return $query->where('status', 'active');
     }
 
+    public function scopeUpcoming($query)
+    {
+        return $query->where('date', '>=', now());
+    }
+
+    public function scopePast($query)
+    {
+        return $query->where('date', '<', now());
+    }
+
     public function getRegistrationCountAttribute(): int
     {
-        return $this->registrations()->active()->count();
+        return $this->registrations()->where('status', 'active')->count();
     }
 
     public function getCheckInCountAttribute(): int
     {
-        return $this->checkIns()->checkedIn()->count();
+        return $this->checkIns()->where('check_ins.status', 'checked_in')->count();
     }
 
     public function isFull(): bool

@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, UserCheck, Calendar, MapPin, Users } from 'lucide-react';
 
-interface Event {
+interface Seminar {
     id: number;
     title: string;
     event_code: string;
@@ -21,7 +21,7 @@ interface Event {
 }
 
 interface RegistrationFormProps {
-    event: Event;
+    seminar: Seminar;
     onSuccess?: (registration: unknown) => void;
     onCancel?: () => void;
 }
@@ -41,7 +41,7 @@ interface RegistrationErrors {
     general?: string;
 }
 
-export default function RegistrationForm({ event, onSuccess, onCancel }: RegistrationFormProps) {
+export default function RegistrationForm({ seminar, onSuccess, onCancel }: RegistrationFormProps) {
     const { data, setData: setFormData, post, processing, errors } = useForm({
         full_name: '',
         nik: '',
@@ -59,7 +59,7 @@ export default function RegistrationForm({ event, onSuccess, onCancel }: Registr
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         
-        post(route('events.register', event.id), {
+        post(route('seminars.register', seminar.id), {
             onSuccess: (response) => {
                 setIsSubmitted(true);
                 if (onSuccess) {
@@ -97,7 +97,7 @@ export default function RegistrationForm({ event, onSuccess, onCancel }: Registr
                     </div>
                     <CardTitle className="text-green-700">Pendaftaran Berhasil!</CardTitle>
                     <CardDescription>
-                        Anda telah berhasil mendaftar untuk event ini. Tiket akan dikirim melalui email.
+                        Anda telah berhasil mendaftar untuk seminar ini. Tiket akan dikirim melalui email.
                     </CardDescription>
                 </CardHeader>
             </Card>
@@ -111,26 +111,26 @@ export default function RegistrationForm({ event, onSuccess, onCancel }: Registr
                 <CardHeader>
                     <CardTitle className="text-lg">Daftar Event</CardTitle>
                     <CardDescription>
-                        Lengkapi formulir di bawah untuk mendaftar ke event ini
+                        Lengkapi formulir di bawah untuk mendaftar ke seminar ini
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-3">
                         <h3 className="font-semibold text-lg bg-gradient-to-r from-orange-600 to-red-500 bg-clip-text text-transparent">
-                            {event.title}
+                            {seminar.title}
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
                             <div className="flex items-center gap-2">
                                 <Calendar className="w-4 h-4" />
-                                <span>{formatDate(event.date)} • {formatTime(event.time)}</span>
+                                <span>{formatDate(seminar.date)} • {formatTime(seminar.time)}</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <MapPin className="w-4 h-4" />
-                                <span>{event.location}</span>
+                                <span>{seminar.location}</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Users className="w-4 h-4" />
-                                <span>{event.available_slots} slot tersisa dari {event.max_capacity}</span>
+                                <span>{seminar.available_slots} slot tersisa dari {seminar.max_capacity}</span>
                             </div>
                         </div>
                     </div>
@@ -146,10 +146,10 @@ export default function RegistrationForm({ event, onSuccess, onCancel }: Registr
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    {event.is_full && (
+                    {seminar.is_full && (
                         <Alert className="mb-6 border-red-200 bg-red-50">
                             <AlertDescription className="text-red-700">
-                                Maaf, event ini sudah penuh. Tidak ada slot pendaftaran yang tersisa.
+                                Maaf, seminar ini sudah penuh. Tidak ada slot pendaftaran yang tersisa.
                             </AlertDescription>
                         </Alert>
                     )}
@@ -163,7 +163,7 @@ export default function RegistrationForm({ event, onSuccess, onCancel }: Registr
                                 value={data.full_name}
                                 onChange={(e) => setData('full_name', e.target.value)}
                                 placeholder="Masukkan nama lengkap sesuai KTP"
-                                disabled={processing || event.is_full}
+                                disabled={processing || seminar.is_full}
                                 className={formErrors.full_name ? 'border-red-500' : ''}
                             />
                             {formErrors.full_name && (
@@ -180,14 +180,14 @@ export default function RegistrationForm({ event, onSuccess, onCancel }: Registr
                                 onChange={(e) => setData('nik', e.target.value)}
                                 placeholder="16 digit NIK sesuai KTP"
                                 maxLength={16}
-                                disabled={processing || event.is_full}
+                                disabled={processing || seminar.is_full}
                                 className={formErrors.nik ? 'border-red-500' : ''}
                             />
                             {formErrors.nik && (
                                 <p className="text-sm text-red-500">{formErrors.nik}</p>
                             )}
                             <p className="text-xs text-gray-500">
-                                NIK hanya dapat digunakan untuk satu pendaftaran event
+                                NIK hanya dapat digunakan untuk satu pendaftaran seminar
                             </p>
                         </div>
 
@@ -199,7 +199,7 @@ export default function RegistrationForm({ event, onSuccess, onCancel }: Registr
                                 value={data.phone}
                                 onChange={(e) => setData('phone', e.target.value)}
                                 placeholder="Contoh: 081234567890"
-                                disabled={processing || event.is_full}
+                                disabled={processing || seminar.is_full}
                                 className={formErrors.phone ? 'border-red-500' : ''}
                             />
                             {formErrors.phone && (
@@ -215,7 +215,7 @@ export default function RegistrationForm({ event, onSuccess, onCancel }: Registr
                                 value={data.email}
                                 onChange={(e) => setData('email', e.target.value)}
                                 placeholder="contoh@email.com"
-                                disabled={processing || event.is_full}
+                                disabled={processing || seminar.is_full}
                                 className={formErrors.email ? 'border-red-500' : ''}
                             />
                             {formErrors.email && (
@@ -249,7 +249,7 @@ export default function RegistrationForm({ event, onSuccess, onCancel }: Registr
                             )}
                             <Button
                                 type="submit"
-                                disabled={processing || event.is_full}
+                                disabled={processing || seminar.is_full}
                                 className="flex-1 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600"
                             >
                                 {processing ? (

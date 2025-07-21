@@ -4,28 +4,54 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { BarChart3, Calendar, CheckSquare, Home, Users, FileText } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: '/dashboard',
-        icon: LayoutGrid,
+        icon: Home,
     },
+    {
+        title: 'Talkshow Management',
+        href: '/admin/seminars',
+        icon: Calendar,
+    },
+    {
+        title: 'Registrations',
+        href: '/admin/registrations',
+        icon: Users,
+    },
+    {
+        title: 'Check-in System',
+        href: '/admin/checkin',
+        icon: CheckSquare,
+    },
+    // Analytics feature (commented for future implementation)
+    /*
+    {
+        title: 'Analytics',
+        href: '/admin/analytics',
+        icon: BarChart3,
+    },
+    */
 ];
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
+        title: 'Event Website',
+        href: '/',
+        icon: Home,
     },
+    // Reports feature (commented for future implementation)
+    /*
     {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
+        title: 'Reports',
+        href: '/admin/reports',
+        icon: FileText,
     },
+    */
 ];
 
 export function AppSidebar() {

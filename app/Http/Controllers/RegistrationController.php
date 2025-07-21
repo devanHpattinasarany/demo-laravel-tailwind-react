@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
-use App\Models\Event;
+use App\Models\Event as Seminar;
 use App\Models\Registration;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class RegistrationController extends Controller
 {
-    public function store(Request $request, Event $event)
+    public function store(Request $request, Seminar $seminar)
     {
         // Validate basic input
         $validated = $request->validate([
@@ -25,15 +25,15 @@ class RegistrationController extends Controller
             'phone.regex' => 'Format nomor telepon tidak valid',
         ]);
 
-        // Check if event is full
-        if ($event->isFull()) {
+        // Check if seminar is full
+        if ($seminar->isFull()) {
             throw ValidationException::withMessages([
-                'general' => 'Maaf, event ini sudah penuh. Tidak ada slot pendaftaran yang tersisa.'
+                'general' => 'Maaf, seminar ini sudah penuh. Tidak ada slot pendaftaran yang tersisa.'
             ]);
         }
 
-        // Check if user already registered for this specific event
-        $existingRegistration = Registration::where('event_id', $event->id)
+        // Check if user already registered for this specific seminar
+        $existingRegistration = Registration::where('event_id', $seminar->id)
             ->where(function ($query) use ($validated) {
                 $query->where('nik', $validated['nik'])
                       ->orWhere('email', $validated['email'])
@@ -45,25 +45,25 @@ class RegistrationController extends Controller
         if ($existingRegistration) {
             if ($existingRegistration->nik === $validated['nik']) {
                 throw ValidationException::withMessages([
-                    'nik' => 'NIK ini sudah terdaftar untuk event ini.'
+                    'nik' => 'NIK ini sudah terdaftar untuk seminar ini.'
                 ]);
             } elseif ($existingRegistration->email === $validated['email']) {
                 throw ValidationException::withMessages([
-                    'email' => 'Email ini sudah terdaftar untuk event ini.'
+                    'email' => 'Email ini sudah terdaftar untuk seminar ini.'
                 ]);
             } else {
                 throw ValidationException::withMessages([
-                    'phone' => 'Nomor telepon ini sudah terdaftar untuk event ini.'
+                    'phone' => 'Nomor telepon ini sudah terdaftar untuk seminar ini.'
                 ]);
             }
         }
 
         // Generate ticket number
-        $ticketNumber = Registration::generateTicketNumber($event->event_code);
+        $ticketNumber = Registration::generateTicketNumber($seminar->event_code);
 
         // Create registration
         $registration = Registration::create([
-            'event_id' => $event->id,
+            'event_id' => $seminar->id,
             'full_name' => $validated['full_name'],
             'nik' => $validated['nik'],
             'phone' => $validated['phone'],
@@ -90,7 +90,7 @@ class RegistrationController extends Controller
 
     public function downloadPdf(Registration $registration)
     {
-        // Load the event relationship
+        // Load the seminar relationship
         $registration->load('event');
 
         // Create PDF from the ticket template

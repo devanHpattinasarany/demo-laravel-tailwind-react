@@ -2,11 +2,11 @@ import React from 'react';
 import { Head } from '@inertiajs/react';
 import HomeLayout from '@/layouts/home-layout';
 import HeroSection from '@/components/HeroSection';
-import EventsGrid from '@/components/EventsGrid';
+import SeminarsGrid from '@/components/SeminarsGrid';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
 
-interface Event {
+interface Seminar {
   id: number;
   title: string;
   description: string;
@@ -24,9 +24,9 @@ interface Event {
 }
 
 interface HomeProps {
-  events: Event[];
+  seminars: Seminar[];
   stats: {
-    total_events: number;
+    total_seminars: number;
     upcoming_this_week: number;
   };
   meta: {
@@ -37,7 +37,7 @@ interface HomeProps {
   };
 }
 
-export default function Home({ events, stats, meta }: HomeProps) {
+export default function Home({ seminars, stats, meta }: HomeProps) {
   return (
     <HomeLayout>
       <Head>
@@ -58,8 +58,8 @@ export default function Home({ events, stats, meta }: HomeProps) {
         {/* Hero Section */}
         <HeroSection stats={stats} />
 
-        {/* Events Grid Section */}
-        <EventsGrid events={events} />
+        {/* Seminars Grid Section */}
+        <SeminarsGrid seminars={seminars} />
 
         {/* Why Choose Section */}
         <section id="about-section" className="py-16 bg-gradient-to-br from-orange-50 via-background to-red-50">
@@ -248,8 +248,8 @@ export default function Home({ events, stats, meta }: HomeProps) {
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
                 <button 
                   onClick={() => {
-                    const eventsSection = document.getElementById('events-section');
-                    eventsSection?.scrollIntoView({ behavior: 'smooth' });
+                    const seminarsSection = document.getElementById('events-section');
+                    seminarsSection?.scrollIntoView({ behavior: 'smooth' });
                   }}
                   className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg font-semibold hover:from-orange-600 hover:to-red-600 transition-all duration-200 shadow-lg hover:shadow-xl"
                 >

@@ -22,15 +22,15 @@ export default function ForgotPassword({ status }: { status?: string }) {
     };
 
     return (
-        <AuthLayout title="Forgot password" description="Enter your email to receive a password reset link">
-            <Head title="Forgot password" />
+        <AuthLayout title="Lupa Password" description="Masukkan email Anda untuk menerima link reset password">
+            <Head title="Lupa Password - Festival Tahuri" />
 
-            {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
+            {status && <div className="mb-4 text-center text-sm font-medium text-green-600 bg-green-50 border border-green-200 rounded-lg p-3">{status}</div>}
 
             <div className="space-y-6">
                 <form onSubmit={submit}>
                     <div className="grid gap-2">
-                        <Label htmlFor="email">Email address</Label>
+                        <Label htmlFor="email">Email Admin</Label>
                         <Input
                             id="email"
                             type="email"
@@ -39,23 +39,27 @@ export default function ForgotPassword({ status }: { status?: string }) {
                             value={data.email}
                             autoFocus
                             onChange={(e) => setData('email', e.target.value)}
-                            placeholder="email@example.com"
+                            placeholder="admin@tahuri.id"
+                            className="border-gray-300 focus:border-orange-500 focus:ring-orange-500"
                         />
 
                         <InputError message={errors.email} />
                     </div>
 
                     <div className="my-6 flex items-center justify-start">
-                        <Button className="w-full" disabled={processing}>
+                        <Button 
+                            className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200" 
+                            disabled={processing}
+                        >
                             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                            Email password reset link
+                            Kirim Link Reset Password
                         </Button>
                     </div>
                 </form>
 
-                <div className="space-x-1 text-center text-sm text-muted-foreground">
-                    <span>Or, return to</span>
-                    <TextLink href={route('login')}>log in</TextLink>
+                <div className="space-x-1 text-center text-sm text-gray-600">
+                    <span>Atau, kembali ke</span>
+                    <TextLink href={route('login')} className="text-orange-600 hover:text-orange-700 font-medium">halaman login</TextLink>
                 </div>
             </div>
         </AuthLayout>

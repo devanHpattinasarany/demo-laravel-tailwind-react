@@ -24,10 +24,10 @@ export default function ConfirmPassword() {
 
     return (
         <AuthLayout
-            title="Confirm your password"
-            description="This is a secure area of the application. Please confirm your password before continuing."
+            title="Konfirmasi Password"
+            description="Ini adalah area aman aplikasi. Silakan konfirmasi password Anda sebelum melanjutkan."
         >
-            <Head title="Confirm password" />
+            <Head title="Konfirmasi Password - Festival Tahuri" />
 
             <form onSubmit={submit}>
                 <div className="space-y-6">
@@ -37,20 +37,24 @@ export default function ConfirmPassword() {
                             id="password"
                             type="password"
                             name="password"
-                            placeholder="Password"
+                            placeholder="Masukkan password Anda"
                             autoComplete="current-password"
                             value={data.password}
                             autoFocus
                             onChange={(e) => setData('password', e.target.value)}
+                            className="border-gray-300 focus:border-orange-500 focus:ring-orange-500"
                         />
 
                         <InputError message={errors.password} />
                     </div>
 
                     <div className="flex items-center">
-                        <Button className="w-full" disabled={processing}>
+                        <Button 
+                            className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200" 
+                            disabled={processing}
+                        >
                             {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                            Confirm password
+                            Konfirmasi Password
                         </Button>
                     </div>
                 </div>

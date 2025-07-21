@@ -40,12 +40,19 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'admin', // Set role as admin for new registrations
+            'email_verified_at' => now(), // Auto-verify email for admin accounts
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Redirect admin users to dashboard, regular users to home
+        if ($user->isAdmin()) {
+            return redirect()->route('dashboard');
+        }
+
+        return redirect()->route('home');
     }
 }

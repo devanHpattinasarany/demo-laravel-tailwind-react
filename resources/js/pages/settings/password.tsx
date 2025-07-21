@@ -58,7 +58,7 @@ export default function Password() {
 
                     <form onSubmit={updatePassword} className="space-y-6">
                         <div className="grid gap-2">
-                            <Label htmlFor="current_password">Current password</Label>
+                            <Label htmlFor="current_password">Password Saat Ini</Label>
 
                             <Input
                                 id="current_password"
@@ -66,16 +66,16 @@ export default function Password() {
                                 value={data.current_password}
                                 onChange={(e) => setData('current_password', e.target.value)}
                                 type="password"
-                                className="mt-1 block w-full"
+                                className="border-gray-300 focus:border-orange-500 focus:ring-orange-500"
                                 autoComplete="current-password"
-                                placeholder="Current password"
+                                placeholder="Masukkan password saat ini"
                             />
 
                             <InputError message={errors.current_password} />
                         </div>
 
                         <div className="grid gap-2">
-                            <Label htmlFor="password">New password</Label>
+                            <Label htmlFor="password">Password Baru</Label>
 
                             <Input
                                 id="password"
@@ -83,32 +83,37 @@ export default function Password() {
                                 value={data.password}
                                 onChange={(e) => setData('password', e.target.value)}
                                 type="password"
-                                className="mt-1 block w-full"
+                                className="border-gray-300 focus:border-orange-500 focus:ring-orange-500"
                                 autoComplete="new-password"
-                                placeholder="New password"
+                                placeholder="Password minimal 8 karakter"
                             />
 
                             <InputError message={errors.password} />
                         </div>
 
                         <div className="grid gap-2">
-                            <Label htmlFor="password_confirmation">Confirm password</Label>
+                            <Label htmlFor="password_confirmation">Konfirmasi Password</Label>
 
                             <Input
                                 id="password_confirmation"
                                 value={data.password_confirmation}
                                 onChange={(e) => setData('password_confirmation', e.target.value)}
                                 type="password"
-                                className="mt-1 block w-full"
+                                className="border-gray-300 focus:border-orange-500 focus:ring-orange-500"
                                 autoComplete="new-password"
-                                placeholder="Confirm password"
+                                placeholder="Ulangi password baru"
                             />
 
                             <InputError message={errors.password_confirmation} />
                         </div>
 
                         <div className="flex items-center gap-4">
-                            <Button disabled={processing}>Save password</Button>
+                            <Button 
+                                disabled={processing}
+                                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                            >
+                                Update Password
+                            </Button>
 
                             <Transition
                                 show={recentlySuccessful}
@@ -117,7 +122,7 @@ export default function Password() {
                                 leave="transition ease-in-out"
                                 leaveTo="opacity-0"
                             >
-                                <p className="text-sm text-neutral-600">Saved</p>
+                                <p className="text-sm text-green-600 font-medium">✓ Password berhasil diupdate</p>
                             </Transition>
                         </div>
                     </form>
