@@ -5,8 +5,8 @@ import { Save, ArrowLeft, Calendar, MapPin, Users, Clock, User, FileText, Image 
 
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Seminar Management', href: '/admin/seminars' },
-    { title: 'Buat Seminar Baru', href: '/admin/seminars/create' },
+    { title: 'Talkshow Management', href: '/admin/seminars' },
+    { title: 'Buat Talkshow Baru', href: '/admin/seminars/create' },
 ];
 
 export default function CreateSeminar() {
@@ -29,16 +29,16 @@ export default function CreateSeminar() {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Buat Seminar Baru - Festival Tahuri Admin" />
+            <Head title="Buat Talkshow Baru - Festival Tahuri Admin" />
             <div className="flex h-full flex-1 flex-col gap-6 rounded-xl p-6 overflow-x-auto">
                 {/* Header */}
                 <div className="flex items-center justify-between">
                     <div>
                         <h1 className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-red-500 bg-clip-text text-transparent">
-                            Buat Seminar Baru
+                            Buat Talkshow Baru
                         </h1>
                         <p className="text-gray-600 dark:text-gray-400 mt-1">
-                            Isi form di bawah untuk membuat seminar Festival Tahuri
+                            Isi form di bawah untuk membuat talkshow Festival Tahuri
                         </p>
                     </div>
                     <Link
@@ -62,14 +62,14 @@ export default function CreateSeminar() {
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                 <div className="lg:col-span-2">
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Nama Seminar *
+                                        Nama Talkshow *
                                     </label>
                                     <input
                                         type="text"
                                         value={data.title}
                                         onChange={(e) => setData('title', e.target.value)}
                                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-                                        placeholder="Contoh: Seminar Financial Planner"
+                                        placeholder="Contoh: Talkshow Financial Planner"
                                         required
                                     />
                                     {errors.title && (
@@ -79,14 +79,14 @@ export default function CreateSeminar() {
 
                                 <div className="lg:col-span-2">
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Deskripsi Seminar *
+                                        Deskripsi Talkshow *
                                     </label>
                                     <textarea
                                         value={data.description}
                                         onChange={(e) => setData('description', e.target.value)}
                                         rows={4}
                                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-                                        placeholder="Jelaskan deskripsi lengkap tentang seminar ini..."
+                                        placeholder="Jelaskan deskripsi lengkap tentang talkshow ini..."
                                         required
                                     />
                                     {errors.description && (
@@ -123,7 +123,7 @@ export default function CreateSeminar() {
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Tanggal Seminar *
+                                        Tanggal Talkshow *
                                     </label>
                                     <input
                                         type="date"
@@ -221,7 +221,7 @@ export default function CreateSeminar() {
 
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Status Seminar *
+                                        Status Talkshow *
                                     </label>
                                     <select
                                         value={data.status}
@@ -253,7 +253,7 @@ export default function CreateSeminar() {
                                 className="px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <Save className="w-4 h-4" />
-                                {processing ? 'Menyimpan...' : 'Simpan Seminar'}
+                                {processing ? 'Menyimpan...' : 'Simpan Talkshow'}
                             </button>
                         </div>
                     </form>
@@ -261,15 +261,15 @@ export default function CreateSeminar() {
 
                 {/* Helper Information */}
                 <div className="bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Tips Membuat Seminar</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Tips Membuat Talkshow</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
                         <div>
-                            <h4 className="font-medium text-orange-700 mb-2">Nama Seminar</h4>
-                            <p>Gunakan nama yang jelas dan menarik. Kode seminar akan dibuat otomatis berdasarkan nama.</p>
+                            <h4 className="font-medium text-orange-700 mb-2">Nama Talkshow</h4>
+                            <p>Gunakan nama yang jelas dan menarik. Kode talkshow akan dibuat otomatis berdasarkan nama.</p>
                         </div>
                         <div>
                             <h4 className="font-medium text-orange-700 mb-2">Kapasitas</h4>
-                            <p>Sesuaikan dengan ukuran venue. Standar untuk seminar adalah 500 peserta.</p>
+                            <p>Sesuaikan dengan ukuran venue. Standar untuk talkshow adalah 500 peserta.</p>
                         </div>
                         <div>
                             <h4 className="font-medium text-orange-700 mb-2">Narasumber</h4>

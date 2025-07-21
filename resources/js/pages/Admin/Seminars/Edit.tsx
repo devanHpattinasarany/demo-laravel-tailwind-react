@@ -29,9 +29,9 @@ export default function EditSeminar({ seminar }: EditSeminarProps) {
                 <Head title="Error - Festival Tahuri Admin" />
                 <div className="flex items-center justify-center h-64">
                     <div className="text-center">
-                        <h1 className="text-2xl font-bold text-gray-900 mb-2">Seminar tidak ditemukan</h1>
+                        <h1 className="text-2xl font-bold text-gray-900 mb-2">Talkshow tidak ditemukan</h1>
                         <Link href="/admin/seminars" className="text-orange-600 hover:text-orange-700">
-                            Kembali ke Daftar Seminar
+                            Kembali ke Daftar Talkshow
                         </Link>
                     </div>
                 </div>
@@ -40,7 +40,7 @@ export default function EditSeminar({ seminar }: EditSeminarProps) {
     }
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Dashboard', href: '/dashboard' },
-        { title: 'Seminar Management', href: '/admin/seminars' },
+        { title: 'Talkshow Management', href: '/admin/seminars' },
         { title: seminar.title, href: `/admin/seminars/${seminar.id}` },
         { title: 'Edit', href: `/admin/seminars/${seminar.id}/edit` },
     ];
@@ -63,7 +63,7 @@ export default function EditSeminar({ seminar }: EditSeminarProps) {
     };
 
     const handleDelete = () => {
-        if (confirm('Apakah Anda yakin ingin menghapus seminar ini? Tindakan ini tidak dapat dibatalkan.')) {
+        if (confirm('Apakah Anda yakin ingin menghapus talkshow ini? Tindakan ini tidak dapat dibatalkan.')) {
             router.delete(`/admin/seminars/${seminar.id}`);
         }
     };
@@ -76,10 +76,10 @@ export default function EditSeminar({ seminar }: EditSeminarProps) {
                 <div className="flex items-center justify-between">
                     <div>
                         <h1 className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-red-500 bg-clip-text text-transparent">
-                            Edit Event
+                            Edit Talkshow
                         </h1>
                         <p className="text-gray-600 dark:text-gray-400 mt-1">
-                            Perbarui informasi seminar "{seminar.title}"
+                            Perbarui informasi talkshow "{seminar.title}"
                         </p>
                     </div>
                     <div className="flex gap-3">
@@ -95,7 +95,7 @@ export default function EditSeminar({ seminar }: EditSeminarProps) {
                             className="px-4 py-2 border-2 border-red-300 text-red-700 hover:bg-red-50 font-semibold rounded-lg transition-colors flex items-center gap-2"
                         >
                             <Trash2 className="w-4 h-4" />
-                            Hapus Event
+                            Hapus Talkshow
                         </button>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ export default function EditSeminar({ seminar }: EditSeminarProps) {
                 {/* Event Code Display */}
                 <div className="bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl p-4">
                     <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium text-gray-700">Kode Event:</span>
+                        <span className="text-sm font-medium text-gray-700">Kode Talkshow:</span>
                         <span className="px-3 py-1 bg-orange-100 text-orange-700 font-mono font-semibold rounded-md">
                             {seminar.event_code}
                         </span>
@@ -123,14 +123,14 @@ export default function EditSeminar({ seminar }: EditSeminarProps) {
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                 <div className="lg:col-span-2">
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Nama Event *
+                                        Nama Talkshow *
                                     </label>
                                     <input
                                         type="text"
                                         value={data.title}
                                         onChange={(e) => setData('title', e.target.value)}
                                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-                                        placeholder="Contoh: Seminar Financial Planner"
+                                        placeholder="Contoh: Talkshow Financial Planner"
                                         required
                                     />
                                     {errors.title && (
@@ -140,14 +140,14 @@ export default function EditSeminar({ seminar }: EditSeminarProps) {
 
                                 <div className="lg:col-span-2">
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Deskripsi Event *
+                                        Deskripsi Talkshow *
                                     </label>
                                     <textarea
                                         value={data.description}
                                         onChange={(e) => setData('description', e.target.value)}
                                         rows={4}
                                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-                                        placeholder="Jelaskan deskripsi lengkap tentang seminar ini..."
+                                        placeholder="Jelaskan deskripsi lengkap tentang talkshow ini..."
                                         required
                                     />
                                     {errors.description && (
@@ -329,11 +329,11 @@ export default function EditSeminar({ seminar }: EditSeminarProps) {
                 <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
                     <h3 className="text-lg font-semibold text-yellow-800 mb-3">⚠️ Peringatan Penting</h3>
                     <div className="space-y-2 text-sm text-yellow-700">
-                        <p>• Kode seminar tidak dapat diubah setelah seminar dibuat</p>
+                        <p>• Kode talkshow tidak dapat diubah setelah talkshow dibuat</p>
                         <p>• Kapasitas tidak boleh kurang dari jumlah peserta yang sudah terdaftar</p>
-                        <p>• Mengubah tanggal seminar dapat mempengaruhi jadwal peserta</p>
+                        <p>• Mengubah tanggal talkshow dapat mempengaruhi jadwal peserta</p>
                         <p>• Event yang di-nonaktifkan tidak akan muncul di halaman publik</p>
-                        <p>• Menghapus seminar hanya bisa dilakukan jika belum ada peserta terdaftar</p>
+                        <p>• Menghapus talkshow hanya bisa dilakukan jika belum ada peserta terdaftar</p>
                     </div>
                 </div>
             </div>

@@ -96,7 +96,7 @@ export default function SeminarCard({ seminar, className = '' }: SeminarCardProp
         {/* Button */}
         <Link href={`/seminars/${seminar.id}`}>
           <Button className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white">
-            Lihat Detail
+            Lihat Detail Talkshow
             <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
         </Link>

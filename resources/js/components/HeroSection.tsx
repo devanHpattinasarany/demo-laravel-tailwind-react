@@ -15,9 +15,9 @@ export default function HeroSection({ stats: _stats }: HeroSectionProps) {
 
   const features = [
     { icon: ShoppingBag, text: "Edukasi Finansial" },
-    { icon: Mic, text: "Seminar Inspiring" },
+    { icon: Mic, text: "Talkshow Inspiring" },
     { icon: Gift, text: "Doorprize Menarik" },
-    { icon: Heart, text: "Community Seminar" }
+    { icon: Heart, text: "Community Talkshow" }
   ];
 
   useEffect(() => {
@@ -27,9 +27,9 @@ export default function HeroSection({ stats: _stats }: HeroSectionProps) {
     return () => clearInterval(interval);
   }, [features.length]);
 
-  const scrollToSeminars = () => {
-    const seminarsSection = document.getElementById('events-section');
-    seminarsSection?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToTalkshows = () => {
+    const talkshowsSection = document.getElementById('events-section');
+    talkshowsSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -163,7 +163,7 @@ export default function HeroSection({ stats: _stats }: HeroSectionProps) {
             <Button
               size="lg"
               className="px-8 py-4 text-base font-semibold bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 shadow-lg hover:shadow-xl transition-all duration-200"
-              onClick={scrollToSeminars}
+              onClick={scrollToTalkshows}
             >
               Daftar Gratis Sekarang
               <ArrowDown className="w-5 h-5 ml-2" />
@@ -181,7 +181,7 @@ export default function HeroSection({ stats: _stats }: HeroSectionProps) {
           {/* Event Info */}
           <div className="pt-8 space-y-4">
             <p className="text-sm text-muted-foreground font-medium">
-              Seminar gratis untuk semua kalangan • Registrasi online mudah dan cepat
+              Talkshow gratis untuk semua kalangan • Registrasi online mudah dan cepat
             </p>
             <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">

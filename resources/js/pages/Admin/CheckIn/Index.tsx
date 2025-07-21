@@ -389,7 +389,7 @@ export default function CheckInIndex({ events, filters, statistics }: CheckInInd
                             Check-in System
                         </h1>
                         <p className="text-gray-600 dark:text-gray-400 mt-1">
-                            Kelola check-in peserta untuk semua event
+                            Kelola check-in peserta untuk semua talkshow
                         </p>
                     </div>
                 </div>
@@ -567,9 +567,9 @@ export default function CheckInIndex({ events, filters, statistics }: CheckInInd
                     <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-2xl p-6">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-blue-700 font-medium text-sm">Event Hari Ini</p>
+                                <p className="text-blue-700 font-medium text-sm">Talkshow Hari Ini</p>
                                 <p className="text-3xl font-bold text-blue-900">{statistics.total_events_today}</p>
-                                <p className="text-blue-600 text-sm">Total event</p>
+                                <p className="text-blue-600 text-sm">Total talkshow</p>
                             </div>
                             <Calendar className="w-8 h-8 text-blue-500" />
                         </div>

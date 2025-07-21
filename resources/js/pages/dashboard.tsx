@@ -54,7 +54,7 @@ export default function Dashboard({ statistics, recentActivities, upcomingSemina
                             className="px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2"
                         >
                             <Plus className="w-4 h-4" />
-                            Buat Seminar
+                            Buat Talkshow
                         </Link>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ export default function Dashboard({ statistics, recentActivities, upcomingSemina
                     <div className="bg-gradient-to-br from-orange-50 to-orange-100 border-2 border-orange-200 rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-orange-700 font-medium text-sm">Total Seminars</p>
+                                <p className="text-orange-700 font-medium text-sm">Total Talkshow</p>
                                 <p className="text-3xl font-bold text-orange-900">{statistics.totalSeminars}</p>
                                 <p className="text-orange-600 text-sm">{statistics.activeSeminars} aktif</p>
                             </div>
@@ -79,7 +79,7 @@ export default function Dashboard({ statistics, recentActivities, upcomingSemina
                             <div>
                                 <p className="text-blue-700 font-medium text-sm">Total Registrasi</p>
                                 <p className="text-3xl font-bold text-blue-900">{statistics.totalRegistrations}</p>
-                                <p className="text-blue-600 text-sm">Semua event</p>
+                                <p className="text-blue-600 text-sm">Semua talkshow</p>
                             </div>
                             <div className="p-3 bg-blue-500 rounded-xl">
                                 <Users className="w-6 h-6 text-white" />
@@ -124,7 +124,7 @@ export default function Dashboard({ statistics, recentActivities, upcomingSemina
                     {/* Upcoming Events */}
                     <div className="bg-white/80 backdrop-blur-sm border border-orange-100 rounded-xl hover:border-orange-200 transition-all duration-300 p-6">
                         <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-xl font-semibold text-gray-900">Seminar Mendatang</h3>
+                            <h3 className="text-xl font-semibold text-gray-900">Talkshow Mendatang</h3>
                             <Link 
                                 href="/admin/seminars"
                                 className="text-orange-600 hover:text-orange-700 text-sm font-medium"
@@ -154,7 +154,7 @@ export default function Dashboard({ statistics, recentActivities, upcomingSemina
                             )) : (
                                 <div className="text-center py-8 text-gray-500">
                                     <Calendar className="w-12 h-12 mx-auto text-gray-300 mb-2" />
-                                    <p>Tidak ada event mendatang</p>
+                                    <p>Tidak ada talkshow mendatang</p>
                                 </div>
                             )}
                         </div>
@@ -216,7 +216,7 @@ export default function Dashboard({ statistics, recentActivities, upcomingSemina
                             className="p-4 bg-white border border-orange-200 rounded-lg hover:border-orange-300 hover:shadow-md transition-all duration-200 text-center group"
                         >
                             <Plus className="w-8 h-8 text-orange-500 mx-auto mb-2 group-hover:scale-110 transition-transform" />
-                            <p className="font-medium text-gray-900">Buat Seminar Baru</p>
+                            <p className="font-medium text-gray-900">Buat Talkshow Baru</p>
                         </Link>
                         
                         <Link

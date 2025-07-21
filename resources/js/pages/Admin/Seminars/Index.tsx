@@ -197,7 +197,7 @@ export default function SeminarsIndex({ seminars, filters, statistics }: Seminar
                                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
                                 <input
                                     type="text"
-                                    placeholder="Cari nama event, kode, lokasi..."
+                                    placeholder="Cari nama talkshow, kode, lokasi..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                     className="w-full pl-9 sm:pl-10 pr-4 py-3 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
@@ -243,7 +243,7 @@ export default function SeminarsIndex({ seminars, filters, statistics }: Seminar
                         <table className="w-full">
                             <thead className="bg-gradient-to-r from-orange-50 to-red-50">
                                 <tr>
-                                    <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900">Event</th>
+                                    <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900">Talkshow</th>
                                     <th className="hidden md:table-cell px-6 py-4 text-left text-sm font-semibold text-gray-900">Tanggal & Waktu</th>
                                     <th className="hidden lg:table-cell px-6 py-4 text-left text-sm font-semibold text-gray-900">Lokasi</th>
                                     <th className="hidden sm:table-cell px-3 sm:px-6 py-3 sm:py-4 text-left text-xs sm:text-sm font-semibold text-gray-900">Kapasitas</th>

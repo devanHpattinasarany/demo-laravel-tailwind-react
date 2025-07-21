@@ -66,12 +66,12 @@ export default function SeminarsGrid({ seminars }: SeminarsGridProps) {
             <div className="w-16 h-16 mx-auto bg-muted rounded-full flex items-center justify-center">
               <Search className="w-8 h-8 text-muted-foreground" />
             </div>
-            <h3 className="text-lg font-semibold">Tidak ada seminar ditemukan</h3>
+            <h3 className="text-lg font-semibold">Tidak ada talkshow ditemukan</h3>
             <p className="text-muted-foreground max-w-md mx-auto">
-              Coba ubah kata kunci pencarian atau filter untuk menemukan seminar yang sesuai.
+              Coba ubah kata kunci pencarian atau filter untuk menemukan talkshow yang sesuai.
             </p>
             <Button variant="outline" className="mt-4 border-orange-200 text-orange-700 hover:bg-orange-50">
-              Cari Seminar Lainnya
+              Cari Talkshow Lainnya
             </Button>
           </div>
         )}

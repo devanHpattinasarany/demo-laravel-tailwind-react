@@ -100,7 +100,7 @@ export default function SeminarShow({ seminar, relatedSeminars, meta }: SeminarS
                 Beranda
               </Link>
               <ChevronRight className="w-4 h-4 text-gray-400" />
-              <span className="text-gray-500">Seminar</span>
+              <span className="text-gray-500">Talkshow</span>
               <ChevronRight className="w-4 h-4 text-gray-400" />
               <span className="text-gray-900 font-medium">{seminar.title}</span>
             </nav>
@@ -224,8 +224,8 @@ export default function SeminarShow({ seminar, relatedSeminars, meta }: SeminarS
                           disabled
                           className="w-full px-8 py-4 bg-gray-300 text-gray-500 font-semibold rounded-lg cursor-not-allowed"
                         >
-                          {seminar.is_full ? 'Seminar Penuh' : 
-                           seminar.status !== 'active' ? 'Seminar Tidak Aktif' : 'Pendaftaran Ditutup'}
+                          {seminar.is_full ? 'Talkshow Penuh' : 
+                           seminar.status !== 'active' ? 'Talkshow Tidak Aktif' : 'Pendaftaran Ditutup'}
                         </Button>
                       )}
                     </div>
@@ -257,7 +257,7 @@ export default function SeminarShow({ seminar, relatedSeminars, meta }: SeminarS
                       className="w-full border-2 border-orange-300 text-orange-700 hover:bg-orange-50 font-semibold rounded-lg transition-colors"
                     >
                       <Share2 className="w-4 h-4 mr-2" />
-                      Bagikan Seminar
+                      Bagikan Talkshow
                     </Button>
                   </div>
                 </div>
@@ -290,7 +290,7 @@ export default function SeminarShow({ seminar, relatedSeminars, meta }: SeminarS
                   <div className="space-y-8">
                     <div>
                       <h3 className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-red-500 bg-clip-text text-transparent mb-6">
-                        Tentang Seminar Ini
+                        Tentang Talkshow Ini
                       </h3>
                       <p className="text-gray-700 leading-relaxed text-lg">
                         {seminar.description}
@@ -300,8 +300,8 @@ export default function SeminarShow({ seminar, relatedSeminars, meta }: SeminarS
                     {/* Enhanced detailed description */}
                     <div className="space-y-6">
                       <p className="text-gray-700 leading-relaxed text-base">
-                        {seminar.title} adalah seminar yang dirancang khusus untuk memberikan pengalaman terbaik 
-                        bagi para peserta. Seminar ini akan menghadirkan pembicara-pembicara berkualitas dan 
+                        {seminar.title} adalah talkshow yang dirancang khusus untuk memberikan pengalaman terbaik 
+                        bagi para peserta. Talkshow ini akan menghadirkan pembicara-pembicara berkualitas dan 
                         aktivitas menarik yang tidak boleh Anda lewatkan.
                       </p>
                       

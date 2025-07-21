@@ -97,7 +97,7 @@ export default function RegistrationForm({ seminar, onSuccess, onCancel }: Regis
                     </div>
                     <CardTitle className="text-green-700">Pendaftaran Berhasil!</CardTitle>
                     <CardDescription>
-                        Anda telah berhasil mendaftar untuk seminar ini. Tiket akan dikirim melalui email.
+                        Anda telah berhasil mendaftar untuk talkshow ini. Tiket akan dikirim melalui email.
                     </CardDescription>
                 </CardHeader>
             </Card>
@@ -109,9 +109,9 @@ export default function RegistrationForm({ seminar, onSuccess, onCancel }: Regis
             {/* Event Summary */}
             <Card>
                 <CardHeader>
-                    <CardTitle className="text-lg">Daftar Event</CardTitle>
+                    <CardTitle className="text-lg">Daftar Talkshow</CardTitle>
                     <CardDescription>
-                        Lengkapi formulir di bawah untuk mendaftar ke seminar ini
+                        Lengkapi formulir di bawah untuk mendaftar ke talkshow ini
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -149,7 +149,7 @@ export default function RegistrationForm({ seminar, onSuccess, onCancel }: Regis
                     {seminar.is_full && (
                         <Alert className="mb-6 border-red-200 bg-red-50">
                             <AlertDescription className="text-red-700">
-                                Maaf, seminar ini sudah penuh. Tidak ada slot pendaftaran yang tersisa.
+                                Maaf, talkshow ini sudah penuh. Tidak ada slot pendaftaran yang tersisa.
                             </AlertDescription>
                         </Alert>
                     )}
@@ -187,7 +187,7 @@ export default function RegistrationForm({ seminar, onSuccess, onCancel }: Regis
                                 <p className="text-sm text-red-500">{formErrors.nik}</p>
                             )}
                             <p className="text-xs text-gray-500">
-                                NIK hanya dapat digunakan untuk satu pendaftaran seminar
+                                NIK hanya dapat digunakan untuk satu pendaftaran talkshow
                             </p>
                         </div>
 
