@@ -261,30 +261,32 @@ export default function HeroSection({ stats: _stats }: HeroSectionProps) {
         </div>
       </div>
 
-      {/* SVG Wave Transition */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg 
-          viewBox="0 0 1200 120" 
-          preserveAspectRatio="none" 
-          className="w-full h-[60px] sm:h-[80px] fill-background"
-          style={{ transform: 'rotate(180deg)' }}
-        >
-          <defs>
-            <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="rgba(251, 146, 60, 0.1)" />
-              <stop offset="50%" stopColor="rgba(239, 68, 68, 0.1)" />
-              <stop offset="100%" stopColor="rgba(251, 146, 60, 0.1)" />
-            </linearGradient>
-          </defs>
-          <path 
-            d="M0,0 C150,100 350,0 600,50 C850,100 1050,0 1200,50 L1200,120 L0,120 Z" 
-            className="fill-background"
-          />
-          <path 
-            d="M0,20 C150,80 350,20 600,40 C850,60 1050,20 1200,40 L1200,120 L0,120 Z" 
-            fill="url(#waveGradient)"
-          />
-        </svg>
+      {/* Modern Seamless Transition - Best Practice 2025 */}
+      <div className="absolute bottom-0 left-0 right-0 h-[100px] overflow-hidden">
+        {/* Transition Layer dengan Clip-Path */}
+        <div 
+          className="absolute inset-0 bg-white"
+          style={{
+            clipPath: 'polygon(0 40%, 25% 35%, 50% 45%, 75% 30%, 100% 35%, 100% 100%, 0 100%)'
+          }}
+        ></div>
+        
+        {/* Gradient Overlay untuk Blend dengan Hero Background */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to bottom, rgba(255, 247, 237, 0) 0%, rgba(255, 247, 237, 0.3) 20%, rgba(254, 245, 235, 0.6) 40%, rgba(255, 255, 255, 1) 60%)',
+            clipPath: 'polygon(0 35%, 20% 45%, 40% 30%, 60% 50%, 80% 25%, 100% 40%, 100% 100%, 0 100%)'
+          }}
+        ></div>
+        
+        {/* Pattern Fade Out */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-b from-transparent to-white opacity-40"
+          style={{
+            clipPath: 'polygon(0 50%, 100% 50%, 100% 100%, 0 100%)'
+          }}
+        ></div>
       </div>
     </section>
   );
