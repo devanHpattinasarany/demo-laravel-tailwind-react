@@ -74,9 +74,9 @@ class SeminarController extends Controller
             'seminar' => $seminarData,
             'relatedSeminars' => $relatedSeminars,
             'meta' => [
-                'title' => $seminar->title . ' - Tahuri Seminars',
+                'title' => $seminar->title . ' - Tahuri Talkshow',
                 'description' => $seminar->description,
-                'keywords' => 'seminar, workshop, edukasi, ' . strtolower($seminar->title),
+                'keywords' => 'talkshow, workshop, edukasi, ' . strtolower($seminar->title),
                 'canonical_url' => route('seminars.show', $seminar),
                 'og_image' => $seminar->poster_url,
             ]

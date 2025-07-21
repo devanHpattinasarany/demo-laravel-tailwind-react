@@ -28,7 +28,7 @@ class RegistrationController extends Controller
         // Check if seminar is full
         if ($seminar->isFull()) {
             throw ValidationException::withMessages([
-                'general' => 'Maaf, seminar ini sudah penuh. Tidak ada slot pendaftaran yang tersisa.'
+                'general' => 'Maaf, talkshow ini sudah penuh. Tidak ada slot pendaftaran yang tersisa.'
             ]);
         }
 
@@ -45,15 +45,15 @@ class RegistrationController extends Controller
         if ($existingRegistration) {
             if ($existingRegistration->nik === $validated['nik']) {
                 throw ValidationException::withMessages([
-                    'nik' => 'NIK ini sudah terdaftar untuk seminar ini.'
+                    'nik' => 'NIK ini sudah terdaftar untuk talkshow ini.'
                 ]);
             } elseif ($existingRegistration->email === $validated['email']) {
                 throw ValidationException::withMessages([
-                    'email' => 'Email ini sudah terdaftar untuk seminar ini.'
+                    'email' => 'Email ini sudah terdaftar untuk talkshow ini.'
                 ]);
             } else {
                 throw ValidationException::withMessages([
-                    'phone' => 'Nomor telepon ini sudah terdaftar untuk seminar ini.'
+                    'phone' => 'Nomor telepon ini sudah terdaftar untuk talkshow ini.'
                 ]);
             }
         }

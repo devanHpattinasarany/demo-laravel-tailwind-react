@@ -75,7 +75,7 @@ export default function SeminarShow({ seminar, relatedSeminars, meta }: SeminarS
         <link rel="canonical" href={meta.canonical_url} />
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
-        <meta property="og:type" content="seminar" />
+        <meta property="og:type" content="talkshow" />
         <meta property="og:url" content={meta.canonical_url} />
         {meta.og_image && <meta property="og:image" content={meta.og_image} />}
         <meta name="twitter:card" content="summary_large_image" />
@@ -318,11 +318,11 @@ export default function SeminarShow({ seminar, relatedSeminars, meta }: SeminarS
                           </li>
                           <li className="flex items-start gap-3">
                             <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
-                            <span>Sertifikat kehadiran digital yang dapat diunduh</span>
+                            <span>Akses materi pembelajaran berkualitas dari praktisi terpercaya</span>
                           </li>
                           <li className="flex items-start gap-3">
                             <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
-                            <span>Dokumentasi acara dan materi presentasi</span>
+                            <span>Kesempatan networking dengan komunitas yang relevan</span>
                           </li>
                         </ul>
                       </div>
@@ -351,7 +351,7 @@ export default function SeminarShow({ seminar, relatedSeminars, meta }: SeminarS
                           </li>
                           <li className="flex items-start gap-3">
                             <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <span>Konfirmasi kehadiran akan dikirimkan melalui email yang terdaftar</span>
+                            <span>Peserta wajib membawa tiket atau menunjukkan bukti pendaftaran</span>
                           </li>
                           <li className="flex items-start gap-3">
                             <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
@@ -365,20 +365,20 @@ export default function SeminarShow({ seminar, relatedSeminars, meta }: SeminarS
                           <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
                             <span className="text-red-600 font-bold text-sm">2</span>
                           </div>
-                          Ketentuan Event
+                          Informasi Tambahan
                         </h4>
                         <ul className="space-y-3 text-gray-700 ml-11">
                           <li className="flex items-start gap-3">
                             <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <span>Peserta wajib mematuhi protokol kesehatan yang berlaku</span>
+                            <span>Talkshow akan dilaksanakan sesuai jadwal yang telah ditentukan</span>
                           </li>
                           <li className="flex items-start gap-3">
                             <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <span>Dilarang membawa makanan dan minuman dari luar venue</span>
+                            <span>Panitia berhak mengubah jadwal atau susunan acara jika diperlukan</span>
                           </li>
                           <li className="flex items-start gap-3">
                             <div className="w-1.5 h-1.5 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                            <span>Panitia berhak menolak peserta yang tidak memenuhi syarat</span>
+                            <span>Untuk informasi lebih lanjut, hubungi panitia penyelenggara</span>
                           </li>
                         </ul>
                       </div>
@@ -400,15 +400,15 @@ export default function SeminarShow({ seminar, relatedSeminars, meta }: SeminarS
                   <div className="inline-flex">
                     <Badge className="px-4 py-2 text-sm bg-orange-100 text-orange-800 border border-orange-200">
                       <Star className="w-4 h-4 mr-2" />
-                      Seminar Rekomendasi
+                      Talkshow Rekomendasi
                     </Badge>
                   </div>
                   <h2 className="text-3xl sm:text-4xl font-bold">
-                    Seminar Untuk
+                    Talkshow Untuk
                     <span className="bg-gradient-to-r from-orange-600 to-red-500 bg-clip-text text-transparent"> Kamu</span>
                   </h2>
                   <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-                    Jelajahi seminar menarik lainnya dari Festival Tahuri
+                    Jelajahi talkshow menarik lainnya dari Festival Tahuri
                   </p>
                 </div>
                 
@@ -470,7 +470,7 @@ export default function SeminarShow({ seminar, relatedSeminars, meta }: SeminarS
                       size="lg"
                       className="border-2 border-orange-300 text-orange-700 hover:bg-orange-50 font-semibold px-8 py-3 hover:-translate-y-1 transition-all duration-200"
                     >
-                      Lihat Semua Seminar
+                      Lihat Semua Talkshow
                       <ArrowLeft className="w-4 h-4 ml-2 rotate-180" />
                     </Button>
                   </Link>
@@ -485,7 +485,7 @@ export default function SeminarShow({ seminar, relatedSeminars, meta }: SeminarS
           <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-orange-600 to-red-500 bg-clip-text text-transparent">
-                Pendaftaran Seminar
+                Pendaftaran Talkshow
               </DialogTitle>
             </DialogHeader>
             <RegistrationForm 

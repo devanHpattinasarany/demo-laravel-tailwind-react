@@ -60,9 +60,9 @@ class HomeController extends Controller
                 'upcoming_this_week' => $seminars->filter(fn($seminar) => $seminar['days_until'] <= 7)->count(),
             ],
             'meta' => [
-                'title' => 'Tahuri Seminars - Platform Seminar Edukasi Terpercaya',
-                'description' => 'Temukan dan daftar seminar edukasi, workshop finansial, dan seminar ekonomi kreatif terbaik. Platform ticketing yang mudah dan terpercaya untuk pengembangan diri Anda.',
-                'keywords' => 'seminar edukasi, workshop finansial, seminar ekonomi kreatif, tahuri seminars, ticketing online',
+                'title' => 'Tahuri Talkshow - Platform Talkshow Edukasi Terpercaya',
+                'description' => 'Temukan dan daftar talkshow edukasi, workshop finansial, dan talkshow ekonomi kreatif terbaik. Platform ticketing yang mudah dan terpercaya untuk pengembangan diri Anda.',
+                'keywords' => 'talkshow edukasi, workshop finansial, talkshow ekonomi kreatif, tahuri talkshow, ticketing online',
                 'canonical_url' => route('home'),
             ]
         ]);
