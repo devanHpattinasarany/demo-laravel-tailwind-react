@@ -56,7 +56,7 @@ export default function SeminarsGrid({ seminars }: SeminarsGridProps) {
           <StaggerContainer 
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
             staggerDelay={0.15}
-            threshold={0.5}
+            threshold={0.1}
           >
             {seminars.map((seminar) => (
               <SeminarCard

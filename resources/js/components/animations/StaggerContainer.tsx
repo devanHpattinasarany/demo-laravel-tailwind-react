@@ -13,7 +13,7 @@ export default function StaggerContainer({
   children, 
   className = "",
   staggerDelay = 0.1,
-  threshold = 0.4
+  threshold = 0.1
 }: StaggerContainerProps) {
   const { ref, inView } = useInView({
     threshold,

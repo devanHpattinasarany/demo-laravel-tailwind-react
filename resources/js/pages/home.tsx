@@ -2,7 +2,7 @@ import React from 'react';
 import { Head } from '@inertiajs/react';
 import HomeLayout from '@/layouts/home-layout';
 import HeroSection from '@/components/HeroSection';
-import SeminarsGridDebug from '@/components/SeminarsGridDebug';
+import SeminarsGrid from '@/components/SeminarsGrid';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
 import { FadeInUp, SlideIn, StaggerContainer } from '@/components/animations';
@@ -60,13 +60,13 @@ export default function Home({ seminars, stats, meta }: HomeProps) {
         <HeroSection stats={stats} />
 
         {/* Seminars Grid Section */}
-        <SeminarsGridDebug seminars={seminars} />
+        <SeminarsGrid seminars={seminars} />
 
         {/* Why Choose Section with Animations */}
         <section id="about-section" className="py-16 bg-gradient-to-br from-orange-50 via-background to-red-50">
           <div className="container mx-auto">
             <div className="max-w-6xl mx-auto text-center space-y-8">
-              <SlideIn direction="up" threshold={0.4} className="space-y-4">
+              <SlideIn direction="up" className="space-y-4">
                 <h2 className="text-3xl font-bold">
                   Mengapa Ikuti 
                   <span className="bg-gradient-to-r from-orange-600 to-red-500 bg-clip-text text-transparent"> Talkshow Festival Tahuri</span>?
@@ -79,7 +79,6 @@ export default function Home({ seminars, stats, meta }: HomeProps) {
               <StaggerContainer 
                 className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12"
                 staggerDelay={0.2}
-                threshold={0.5}
               >
                 <div className="bg-white/80 backdrop-blur-sm rounded-xl p-8 border border-orange-100 hover:border-orange-200 transition-all duration-300 hover:shadow-lg space-y-4">
                   <div className="w-16 h-16 mx-auto bg-orange-100 rounded-2xl flex items-center justify-center">
