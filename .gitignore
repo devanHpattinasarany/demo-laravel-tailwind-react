@@ -27,6 +27,7 @@ claude_guide.md
 CLAUDE.md
 planning.md
 task.md
+EMAIL_SETUP_GUIDE.md
 # Include build folder in Git
 !public/build
 !public/build/**

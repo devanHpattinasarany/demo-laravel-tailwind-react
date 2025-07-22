@@ -7,7 +7,9 @@ use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use App\Models\Event as Seminar;
 use App\Models\Registration;
+use App\Notifications\RegistrationConfirmation;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Notification;
 
 class RegistrationController extends Controller
 {
@@ -73,9 +75,16 @@ class RegistrationController extends Controller
             'status' => 'active',
         ]);
 
+        // Load event relationship for notification
+        $registration->load('event');
+
+        // Send email notification with ticket
+        Notification::route('mail', $validated['email'])
+            ->notify(new RegistrationConfirmation($registration));
+
         // Redirect to ticket display page
         return redirect()->route('registrations.show', $registration)->with([
-            'success' => 'Pendaftaran berhasil! Tiket Anda: ' . $ticketNumber
+            'success' => 'Pendaftaran berhasil! Tiket Anda: ' . $ticketNumber . '. Email konfirmasi telah dikirim ke ' . $validated['email']
         ]);
     }
 
